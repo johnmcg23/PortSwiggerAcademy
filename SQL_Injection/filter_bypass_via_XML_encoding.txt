@@ -35,7 +35,7 @@ In order to do this we must bypass the WAF
 We must obfuscate the payload using XML enetities
 
 Using the Hackvertor extension, go to encodings as we want to encode the SQL injection as a hex entity 
-for the application to not be suspicious of the tampered with XML payload
+for the WAF to not be suspicious of the tampered with XML payload
 
 derive a UNION SELECT inside the hex encoding
 
