@@ -1,0 +1,39 @@
+TASK:
+To solve the lab, perform a SQL injection attack that logs in to the 
+application as the administrator user.
+
+
+Probably PS SQL command:
+
+SELECT *
+FROM user
+WHERE username = '' AND passsword = ''
+
+
+My process of breaking this:
+SELECT *
+FROM user
+WHERE username = 'administrator'' OR 1=1-- AND passsword = ''
+
+
+SOLUTION:
+type into username field:
+administrator' OR 1=1--
+
+
+why does this work?
+1. ‘administrator’ OR 1=1: This is the crux of the SQL injection. 
+The OR 1=1 clause is always true, which means the database will return 
+all records where either the username is ‘administrator’ or 1=1 (which is always true). 
+This effectively bypasses any need for the correct username.
+
+2. '–-': This is an SQL comment. Everything after -- is ignored by the SQL interpreter. 
+This means the AND password = '' part is ignored, bypassing the need for a password.
+
+So, if the application doesn’t properly sanitize its inputs, an attacker can use this 
+command to log in as an administrator without needing the administrator’s password. 
+It’s a powerful reminder of why it’s important to prevent SQL injection by using techniques 
+like prepared statements or parameterized queries.
+
+Remember, it’s crucial to always validate and sanitize user inputs to protect your application from 
+such vulnerabilities. Never trust user input blindly!
