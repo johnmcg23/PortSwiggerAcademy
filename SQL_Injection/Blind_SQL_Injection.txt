@@ -32,13 +32,35 @@ based on this boolean logic, if i now use ' AND SUBSTRING((SELECT Password FROM 
 it should return welcome back, however getting no welcome back...
 
 used this ' AND SUBSTRING((SELECT password FROM users WHERE username = 'administrator'), 9, 1) > 'a 
-worked however very tedious, potentially some better way of doing it...
+worked however very tedious, potentially some better way of doing it... perhaps using python script
 
 eventually got back this for the password:
-rharxujq 
+rharxujq (which is wrong :/)
 
 
 this didnt work however for the password, not sure why...
+going to check the length of the password by using the query:
+' AND (SELECT username FROM users Where LENGTH(password) = 20 AND username = 'administrator') = 'administrator
+
+By using this query i found the password length to be 20...
+
+Realise my mistake i was only checking for letters with the previos query, as when i queried using:
+' AND SUBSTRING((SELECT password FROM users WHERE username = 'administrator'), 9, 1) > '0
+
+This returned true!
 
 
+THIS IS ALL WRONG, SHOULD HAVE SENT TO INTRUDER
 
+makes it so much easier to brute force this
+
+the burpsuite cluster bomb could be improved by removing the substring index when the index is found so 
+that in the next round it is taken out
+
+security of website could retrun the same length of chars even if the user does get in???
+
+
+final password for username administrator after cluster bomb of Blind SQL Injection:
+rharxujq62w35xzsb8q0
+
+new email: igotyourpasswordviabruteforce@badguy.co.uk
