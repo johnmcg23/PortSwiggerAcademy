@@ -31,3 +31,7 @@ payload 2: brute force alaphanumeric list
 
 after brute forcing i obtained the password for the user administrator:
 kwxc2tp31zmgo3oyg5ef
+
+
+
+'||(SELECT CASE WHEN (1=1) THEN ____ ELSE ____ END FROM this-table) ||'
