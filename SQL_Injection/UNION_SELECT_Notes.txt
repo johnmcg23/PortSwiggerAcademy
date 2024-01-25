@@ -1,0 +1,17 @@
+must test the number of columns being returned
+by the SQL query in the first place.
+
+Can use the following to test:
+' UNION SELECT NULL, NULL FROM table_name-- 
+
+this tests if the application returns 2 columns, 
+if it does then we get a 200 response code.
+
+This means we can then modify our malicious
+query to look for exact columns for us like
+the following:
+' UNION SELECT username, password FROM users-- 
+
+However, the two values' data types returned
+by the databasemust match the query we are 
+sending
