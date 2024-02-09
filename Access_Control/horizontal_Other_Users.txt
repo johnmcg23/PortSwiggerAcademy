@@ -1,0 +1,11 @@
+This is basically where another users can gain access to another users account info
+
+In this lab you have to gain access to carlos' API key
+
+In order to do this we first get his user id which is leaked in the intercept
+when clicking on his name
+
+this is his userId=7e051c49-8d57-4b55-ace4-4d608f9a089f
+
+from this we then use this when logging in, therefore getting his API key:
+VS0sk2eDyEW16GFEdXLkWe8Vk3ipylkI

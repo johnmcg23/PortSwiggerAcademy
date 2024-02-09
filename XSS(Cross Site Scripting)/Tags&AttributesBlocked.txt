@@ -1,0 +1,45 @@
+<marquee onstart=print()>
+
+this tag is blocked giving a 400 response code
+
+Inorder to find what tags are not blocked, send the code to the Intruder
+
+
+In intruder:
+1. replace the value of the search term with <>
+
+2. Place the cursor between the angle brackets and click "Add §" twice, 
+to create a payload position. The value of the search term should now look like: <§§>
+
+3. visit the portswigger cheat sheet https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+and click "Copy tags to clipboard".
+
+4. click paste in payload simple list
+
+5. Click "Start attack".
+
+6. When the attack is finished, review the results. Note that all payloads caused an HTTP 400 response,
+except for the body payload, which caused a 200 response.
+
+7. Go back to the Positions tab in Burp Intruder and replace your search term with:
+<body%20=1>
+
+8. Place the cursor before the = character and click "Add §" twice, to create a payload position. 
+The value of the search term should now look like: <body%20§§=1>
+
+9. Visit the https://portswigger.net/web-security/cross-site-scripting/cheat-sheet and click 
+"copy events to clipboard".
+
+10. In Burp Intruder, in the Payloads tab, click "Clear" to remove the previous payloads. 
+Then click "Paste" to paste the list of attributes into the payloads list. Click "Start attack".
+
+11. When the attack is finished, review the results. Note that all payloads caused an HTTP 400 response, 
+except for the onresize, onbeforeinput, onbeforetoggle, onratechange, onresize and onscrollend payloads, which all caused a 200 response.
+
+12. Go to the exploit server and paste the following code, replacing YOUR-LAB-ID with your lab ID:
+<iframe src="https://0ac10082039064fb806e2134009a00b9.web-security-academy.net/?search=%22%3E%3Cbody%20onresize=alert(1)%3E" onload=this.style.width='100px'>
+
+
+13. Click "Store" and "Deliver exploit to victim".
+
+<body%20onbeforeinput=1>

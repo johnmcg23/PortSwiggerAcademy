@@ -1,0 +1,5 @@
+replaced url with:
+/javascript:alert(document.cookie)
+
+inspected element to see the query string was being put into the back button
+due to the jQuery script in the page source

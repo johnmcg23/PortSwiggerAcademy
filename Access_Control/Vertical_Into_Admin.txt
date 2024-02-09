@@ -1,0 +1,11 @@
+In this lab you are suppose to delete the user carlos using the administrator account
+
+in order to do this you can see the userid is used to identify your own account
+
+therefore tampering with this and changing it to administrator means you are allowed access to the admin account
+
+you can this update password and look in burp to see the password as:
+42i1rzse71sauhb859ji
+
+Using this you can then log into the administrator account and delete carlos
+by accessing the admin panel 

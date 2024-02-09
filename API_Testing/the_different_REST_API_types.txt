@@ -1,0 +1,21 @@
+REST (Representational State Transfer) architectural style for designing networked applications
+
+
+The most common of the HTTP methods are:
+
+GET:        Used to retrieve a representation of a resource.
+
+POST:       Used to create a new resource.
+
+PUT:        Used to modify an existing resource.
+
+DELETE:     Used to remove a resource.
+
+OPTIONS:    Allow a client to inquire about the communication 
+            options available on a particular resource without 
+            performing any actual resource manipulation
+
+            Basically sees what HTTP method the client is allowed 
+            to use
+
+PATCH:      Used to apply partial modifications to a resource

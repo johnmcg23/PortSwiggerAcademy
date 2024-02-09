@@ -7,3 +7,13 @@ product?productId=1&storeId="></select><img%20src=1%20onerror=alert(1)>
 as this uses the select tag
 
 the important part was being able to manipulate the URL to contain &storedid=
+
+the "location.search" is typically vulnerable to DOM XSS attacks.
+
+this looks the at the query string in the URL in thei case ?productId=2
+
+and takes in the value of that
+
+however us changing that to ?productId=1&storeId= allowed us to set the value for storeId
+
+<img src='x' onerror=alert(1)>

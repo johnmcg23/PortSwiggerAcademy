@@ -1,0 +1,26 @@
+the hash change event is when text is input after a hashtag in the URL
+
+this is the vulnerable code:
+$(window).on('hashchange', function(){
+                            var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');
+                            if (post) post.get(0).scrollIntoView();
+);
+
+here is a breakdown of the code:
+
+$(window).on('hashchange', function(){...});: This binds a function to the hashchange event of the window. 
+The hashchange event is triggered whenever the fragment identifier (the part of the URL following the # symbol) 
+of the URL changes.
+
+var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');: 
+This line selects an h2 element within a section with the class blog-list whose text content contains the decoded 
+fragment identifier from the URL. It decodes the fragment identifier using decodeURIComponent and then uses it in the 
+jQuery selector.
+
+if (post) post.get(0).scrollIntoView();: This checks if the post variable is truthy (i.e., if any matching element was found). 
+If a matching element is found, it gets the first DOM element from the jQuery object using post.get(0) and then calls scrollIntoView() 
+on that DOM element. This scrolls the browser window so that the selected element is brought into view.
+
+
+knowing this i can now input malicious code into the body of the HTML code:
+<iframe src="https://0acf005003ec62f9801f21bd00da00ca.web-security-academy.net/#" onload="this.src+='<img src=1 onerror=print(1)>'"></iframe>
