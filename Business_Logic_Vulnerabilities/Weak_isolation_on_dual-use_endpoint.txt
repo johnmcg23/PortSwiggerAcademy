@@ -1,0 +1,6 @@
+changing the username in the form submission to admin and taking out
+the currentPassword field gave me error of invalid username
+
+therefore changed the name to administrator and got password changed succesfully
+
+then logged out of wiener, logged into administrator and deleted carlos

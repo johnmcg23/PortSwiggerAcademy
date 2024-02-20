@@ -1,0 +1,16 @@
+could use the following to see if there is a field for password in the database:
+https://insecure-website.com/user/lookup?username=admin'+%26%26+this.password!%3d'
+
+
+if we know the username field exists then we can run this:
+admin' && this.username!=' 
+
+or this:
+admin' && this.foo!='
+
+If the password field exists, you'd expect the response to be identical to the response 
+for the existing field (username), but different to the response for the field that 
+doesn't exist (foo).
+
+If you want to test different field names, you could perform a dictionary attack, 
+by using a wordlist to cycle through different potential field names.

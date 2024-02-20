@@ -1,0 +1,4 @@
+inputting a minus value of -20 bikes will bring the total rpice down of the leather jacket, 
+the system must only checki the overall price, therefore allowing you buy if the price is less than 100
+
+

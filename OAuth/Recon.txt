@@ -1,0 +1,6 @@
+sending GET requests to these endpoints will give good info
+
+/.well-known/oauth-authorization-server
+/.well-known/openid-configuration
+
+These will return a JSON configuration file containing key information

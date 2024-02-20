@@ -1,0 +1,5 @@
+using the X-Forwarded-For: 
+this header is supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection
+
+IP blocking can basically be done away with by using the header of X-Forwarded-For and incrementing the number for 
+every attempt at login

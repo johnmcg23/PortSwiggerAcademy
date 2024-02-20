@@ -1,0 +1,7 @@
+{"username":{"$regex":"admin.*"},"password":{"$ne":""}}
+
+this basically means check any account that begins with admin 
+and if there is a record found if the password does not equal
+an empty string then log in
+
+this allows us into the administrator account

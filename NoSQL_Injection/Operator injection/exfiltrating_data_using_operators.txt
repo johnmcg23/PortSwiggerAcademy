@@ -1,0 +1,11 @@
+You may be able to extract data using operators that don't enable 
+you to run JavaScript. For example, you may be able to use the $regex 
+operator to extract data character by character.
+
+using a payload like:
+{"username":"admin","password":{"$regex":"^.*"}}
+
+if the response is different then you can use this to extract data
+character by character:
+{"username":"admin","password":{"$regex":"^a*"}}
+

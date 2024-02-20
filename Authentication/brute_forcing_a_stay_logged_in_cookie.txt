@@ -1,0 +1,23 @@
+stay logged in cookie: d2llbmVyOjUxZGMzMGRkYzQ3M2Q0M2E2MDExZTllYmJhNmNhNzcw
+
+decoding this in base 64 gives:
+wiener:51dc30ddc473d43a6011e9ebba6ca770
+
+this is clearly the username and password however my original password was "peter"
+
+most likely a hash, therefore going to use a kali tool to get the hash
+
+this is an MD5 hash as when reversed peter was got, therefore no salt in the hash 
+which is good
+
+
+to decode the stay logged in cookie is      base64 --> MD5 --> plain text
+
+
+to encode we go from                        plain text password --> MD5 encode --> carlos:MD5 encoded --> base64 encode
+this will give us the stay logged in cookie
+
+
+we have a list of candidate passwords given to us
+
+

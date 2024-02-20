@@ -1,0 +1,50 @@
+using the GET post HTTP request we can decrypt data and display it on the html page
+
+using the POST comment HTTP request we can encrypt the data using the stay-logged-in cookie value
+
+
+this is what encryped "invalid email address: wiener" comes out as:
+LnBeKUFrIWiMaMPJptP00xji4nTZHg80BtoIj9TmRr4%3d
+
+this is what encryped "invalid email address: admin" comes out as:
+LnBeKUFrIWiMaMPJptP00xtNG4ODJpwERJK87lTRMhU%3d
+
+
+we can see that up until the first x both are the same, then they differ
+
+
+submitted the value "ji4nTZHg80BtoIj9TmRr4%3d" in the notification of the decrypt HTTP request(POST comment)
+results in an internal server error
+
+then submitting "ccccccccccccccccccccccji4nTZHg80BtoIj9TmRr4%3d" results in:
+M�w5.����j��J�Δ���o�v�S�$��zk
+
+using the decrypted stay logged in cookie value we get:
+wiener:1708174245656
+
+we could brute force the number for the admin account and gain access that way, 
+however this would take very long, but this looks like a timestamp so we could maybe
+guess when the user created last logged on
+
+putting my timestamp into https://www.unixtimestamp.com I get:
+Sat Feb 17 2024 12:50:45 GMT+0000
+
+we could use this to assume the login will not be in the future and will not have been more than a few days ago 
+as the cookie will have expired
+
+if we brute force the timestamp of the last even few days this would take very long
+
+however we can create our own encrypted cookie value that would be trusted by the server, making 
+our own timestamp of the admin by encrypting the looking at the result and putting that as the 
+cookie value, therefore logging in
+
+
+encrypting the "admin:1708174245656" value in the email value we get:
+LnBeKUFrIWiMaMPJptP005a8%2fLpLZIcid6fT%2fq16zhW8tEHMhLB%2ftdogzLC26Vuh
+
+this decrypted perfectly too, however this didnt work as the admins username
+is "administrator"
+
+therefore using "administrator:1708174245656"
+we get: LnBeKUFrIWiMaMPJptP00y5L8VZ0dMMGj0jGr5YgRef%2fV718gy1yvcxHHgDlOH%2bk8Dp9UWwIgUCEzmlVSgt60g%3d%3d
+

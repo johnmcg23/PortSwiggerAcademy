@@ -1,0 +1,34 @@
+$where - Matches documents that satisfy a JavaScript expression.
+$ne - Matches all values that are not equal to a specified value.
+$in - Matches all of the values specified in an array.
+$regex - Selects documents where values match a specified regular expression.
+
+submitting these:
+
+In JSON messages, you can insert query operators as nested objects. 
+For example, {"username":"wiener"} becomes {"username":{"$ne":"invalid"}}.
+
+For URL-based inputs, you can insert query operators via URL parameters. 
+For example, username=wiener becomes username[$ne]=invalid. 
+
+If this doesn't work, you can try the following:
+
+1. Convert the request method from GET to POST.
+2. Change the Content-Type header to application/json.
+3. Add JSON to the message body.
+4. Inject query operators in the JSON.
+
+
+could use this payload to bypass authentication:
+{"username":{"$ne":"invalid"},"password":{"$ne":"invalid"}}
+
+This states if the username is not equal to "invalid" and the password is not equal to "invalid"
+then this returns all login credentials where both the username and password are not equal to invalid
+
+To target an account, you can construct a payload that includes a known username, or a username that you've guessed. 
+For example:
+
+{"username":{"$in":["admin","administrator","superadmin"]},"password":{"$ne":""}}
+
+
+

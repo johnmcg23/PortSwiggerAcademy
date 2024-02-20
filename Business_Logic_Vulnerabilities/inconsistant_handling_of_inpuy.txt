@@ -1,0 +1,14 @@
+this lab when inputting a very long email field only takes 255 characters, 
+
+therefore we can use the admin email of "dontwannacry.com" as a subdomain 
+of the labs email
+
+having the m in dontwannacry.com as the 255th character means anhything payload_str
+this will be cut off, i.e. our subdomain
+
+this means having this @dontwannacry.com email address we can then delete users as
+we are administrators
+
+we found this out by hitting the /admin endpoints and seeing only users with 
+a @dontwannacry.com email can access it
+
