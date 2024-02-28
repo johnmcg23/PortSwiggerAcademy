@@ -1,0 +1,28 @@
+race conditions are similar t business logic vulnerabilities, 
+anywhere something that shouldnt be allowed to happen happens 
+is most likely a race conditions
+
+
+steps to finding a race conditions:
+predict, probe and prove
+
+
+1 - Predict potential collisions
+Testing every endpoint is impractical. After mapping out the target site as normal, you can reduce the number of endpoints that you need to test by asking yourself the following questions:
+
+Is this endpoint security critical? Many endpoints don't touch critical functionality, so they're not worth testing.
+Is there any collision potential? For a successful collision, you typically need two or more requests that trigger operations on the same record. For example, consider the following variations of a password reset implementation:
+Collision potential
+With the first example, requesting parallel password resets for two different users is unlikely to cause a collision as it results in changes to two different records. However, the second implementation enables you to edit the same record with requests for two different users.
+
+2 - Probe for clues
+To recognize clues, you first need to benchmark how the endpoint behaves under normal conditions. You can do this in Burp Repeater by grouping all of your requests and using the Send group in sequence (separate connections) option. For more information, see Sending requests in sequence.
+
+Next, send the same group of requests at once using the single-packet attack (or last-byte sync if HTTP/2 isn't supported) to minimize network jitter. You can do this in Burp Repeater by selecting the Send group in parallel option. For more information, see Sending requests in parallel. Alternatively, you can use the Turbo Intruder extension, which is available from the BApp Store.
+
+Anything at all can be a clue. Just look for some form of deviation from what you observed during benchmarking. This includes a change in one or more responses, but don't forget second-order effects like different email contents or a visible change in the application's behavior afterward.
+
+3 - Prove the concept
+Try to understand what's happening, remove superfluous requests, and make sure you can still replicate the effects.
+
+Advanced race conditions can cause unusual and unique primitives, so the path to maximum impact isn't always immediately obvious. It may help to think of each race condition as a structural weakness rather than an isolated vulnerability.

