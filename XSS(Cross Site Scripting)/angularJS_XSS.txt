@@ -1,0 +1,27 @@
+when the ng-app header is used it means the application could be 
+subject to XSS attacks. 
+
+using {{}} an attack can be formed
+
+
+in this lab the use of:
+{{alert(1)}} when searching for thi result comes back null
+saying "0 results for" "
+
+this is due to the words being closed in an ng-app directive
+
+using this payload:
+{{$on.constructor('alert(1)')()}}
+
+solves the lab
+
+
+
+The $ sign just represents it is a function. $on.constructor is constructor 
+function when invoked with parameters executes it's argument passed as a string. 
+Thus passed with argument it is $on.constructor('alert(1)') and to denote constructor is a function "()" 
+is added to look like: $on.constructor('alert(1)')(). This is similar to the following snippet in javascript:
+
+function (){
+   alert(1);
+}
