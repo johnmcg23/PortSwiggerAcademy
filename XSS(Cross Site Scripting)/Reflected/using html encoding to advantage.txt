@@ -1,0 +1,10 @@
+in this lab the comment section uses a href reference for the 
+website field, therefore by somehow breaking out of this we can use
+a XSS attack.
+
+This lab encodes certain characters like ' or "
+
+therefore using the encoded values will allow for this payload to work:
+&apos;-alert(document.domain)-&apos;
+
+
