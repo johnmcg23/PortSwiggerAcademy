@@ -1,0 +1,6 @@
+in this lab you need to intercept the websocket request in the burp proxy and change
+the value to the malicious code, as frontend encodeds the values of angle brackets etc..
+
+payload is this in the intercept:
+"<img src=1 onerror='alert(1)'>;"
+

