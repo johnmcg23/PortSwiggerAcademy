@@ -1,0 +1,13 @@
+This lab contains a blind OS command injection vulnerability in the feedback function.
+
+The application executes a shell command containing the user-supplied details. 
+The output from the command is not returned in the response.
+
+To solve the lab, exploit the blind OS command injection vulnerability to cause a 10 second delay.
+
+
+In the submit feedback form, the email field is SQL injectable, and OS command injectable.
+
+
+using the following command by the scanner solved the lab:
+badGuy@email.com|ping -n 21 127.0.0.1||`ping -c 21 127.0.0.1` #' |ping -n 21 127.0.0.1||`ping -c 21 127.0.0.1` #\" |ping -n 21 127.0.0.1

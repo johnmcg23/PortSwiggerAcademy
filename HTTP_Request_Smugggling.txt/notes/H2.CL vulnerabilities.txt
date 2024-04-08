@@ -1,0 +1,40 @@
+H2.CL vulnerabilities
+HTTP/2 requests don't have to specify their length explicitly in a header. During downgrading, this means front-end servers often add an HTTP/1 Content-Length header, deriving its value using HTTP/2's built-in length mechanism. Interestingly, HTTP/2 requests can also include their own content-length header. In this case, some front-end servers will simply reuse this value in the resulting HTTP/1 request.
+
+The spec dictates that any content-length header in an HTTP/2 request must match the length calculated using the built-in mechanism, but this isn't always validated properly before downgrading. As a result, it may be possible to smuggle requests by injecting a misleading content-length header. Although the front-end will use the implicit HTTP/2 length to determine where the request ends, the HTTP/1 back-end has to refer to the Content-Length header derived from your injected one, resulting in a desync.
+
+Front-end (HTTP/2)
+
+:method	POST
+:path	/example
+:authority	vulnerable-website.com
+content-type	application/x-www-form-urlencoded
+content-length	0
+GET /admin HTTP/1.1
+Host: vulnerable-website.com
+Content-Length: 10
+
+x=1
+
+Back-end (HTTP/1)
+
+POST /example HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+
+GET /admin HTTP/1.1
+Host: vulnerable-website.com
+Content-Length: 10
+
+x=1GET / H
+
+
+
+Tip
+When performing some request smuggling attacks, you will want headers from the victim's request to be appended to your smuggled prefix. 
+However, these can interfere with your attack in some cases, resulting in duplicate header errors and suchlike. 
+In the example above, we've mitigated this by including a trailing parameter and a Content-Length header in the smuggled prefix. 
+
+By using a Content-Length header that is slightly longer than the body, the victim's request will still be appended to your smuggled prefix but 
+will be truncated before the headers.

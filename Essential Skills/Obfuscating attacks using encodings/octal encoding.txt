@@ -1,0 +1,6 @@
+Octal escaping works in pretty much the same way as hex escaping, 
+except that the character references use a base-8 numbering system rather than base-16. 
+
+These are prefixed with a standalone backslash, meaning that the lowercase letter a is represented by \141.
+
+eval("\141lert(1)")

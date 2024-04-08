@@ -1,0 +1,20 @@
+some websites dont have their publi keys at the enpoints of:
+/jwks.json or /.well-known/jwks.json
+
+
+For this reason if we have two JWT tokens (log in and out twice) we can use burps docker with the command: (these tokens are just raw and not in .txt files)
+docker run --rm -it portswigger/sig2n <token1> <token2>
+
+
+this command returns two keys, a x509 key and a pkcs1 key.
+
+it also returns the tampered JWT for both of these keys.
+
+
+To test which works on the server, make the request to your account with both, 
+the server will reject one but accept the one that works.
+
+in my case it wwas the x509 key that worked... then I followed the same process as an 
+algorithm attack in the previous lab to gain access to the /admin page copying the key value 
+into a new generated symmetric key and signed it with the malicious request. 
+

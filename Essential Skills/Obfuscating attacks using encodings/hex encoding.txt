@@ -1,0 +1,15 @@
+Another option when injecting into a string context is to use hex escapes, which represent characters using 
+their hexadecimal code point, prefixed with \x. 
+
+For example, the lowercase letter a is represented by \x61.
+
+Just like unicode escapes, these will be decoded client-side as long as the input is evaluated as a string:
+
+
+eval("\x61lert")
+
+
+Note that you can sometimes also obfuscate SQL statements in a similar manner using the prefix 0x. 
+For example, 
+0x53454c454354 may be decoded to form the SELECT keyword.
+

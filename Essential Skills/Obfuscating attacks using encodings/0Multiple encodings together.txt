@@ -1,0 +1,16 @@
+It is important to note that you can combine encodings to hide your payloads behind multiple layers of obfuscation. 
+
+Look at the javascript: URL in the following example:
+<a href="javascript:&bsol;u0061lert(1)">Click me</a>
+
+Browsers will first HTML decode &bsol;, resulting in a backslash. 
+
+This has the effect of turning the otherwise arbitrary u0061 characters into the unicode escape \u0061:
+<a href="javascript:\u0061lert(1)">Click me</a>
+
+
+This is then decoded further to form a functioning XSS payload:
+<a href="javascript:alert(1)">Click me</a>
+
+
+Clearly, to successfully inject a payload in this way, you need a solid understanding of which decoding is performed on your input and in what order.

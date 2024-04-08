@@ -1,0 +1,13 @@
+# This is the incoming JWT
+jwt_header = {
+    "alg": "HS256",
+    "typ": "JWT",
+    "kid": "1 OR 1=1; --"
+}
+
+# This is the vulnerable query
+query = f"SELECT * FROM keys WHERE id = {jwt_header['kid']}"
+
+
+In this case, the kid value 1 OR 1=1; -- will make the query return all keys from the database,
+because 1 OR 1=1 is always true. The -- comments out the rest of the SQL command, preventing syntax errors.

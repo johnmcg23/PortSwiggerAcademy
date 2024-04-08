@@ -1,0 +1,13 @@
+Although not strictly a form of encoding, in some cases, you may be able to obfuscate 
+your SQL injection attacks using the CHAR()function. This accepts a single decimal or hex code 
+point and returns the matching character. 
+
+Hex codes must be prefixed with 0x. 
+
+For example, both CHAR(83) and CHAR(0x53) return the capital letter S.
+
+
+even if SELECT is blacklisted, the following injection initially appears harmless:
+CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
+
+when this is processed as SQL by the application, it will dynamically construct the SELECT keyword.

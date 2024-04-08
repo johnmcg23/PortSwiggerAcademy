@@ -1,0 +1,53 @@
+key got from /jwks.json
+
+{"keys":
+    [
+        {
+        "kty":"RSA",
+        "e":"AQAB",
+        "use":"sig",
+        "kid":"aaf48c76-acb1-46ec-9171-9039343479d0",
+        "alg":"RS256",
+        "n":"j2wH9Preyy5eTK2mwhwdjAdN0-6-2dJS2b-GvB27wXy3CPI8J77H1IBgfDfNTvOW_5CmbqSnR6NyzosZzibYqm02LmmLlj7G566F-1lOrhUvQOZw89TQ8iNsGY-x5i_BSxG3Td87-nSSPIqtRqSxpB4_Zyl0VW0nWff00PlrWWG73yuE_DG9TbvsjX5F_8huwXsPI6QIsa4h0D-1-FJFoaHRzXsFwVBwnbJkmxN97q6YzeV9fPyO_8MhXzU7_L2nNu9wa08-RFG6SR1u8V_8nxJENrZu2dB298nNHhtRR4TggYYRETFKtvx41yci7N4nKXMeYjAMi2Ul6zpU7kmeOw"
+        }
+    ]
+}
+
+this in the format of jwks
+
+the jwk is:
+        {
+        "kty":"RSA",
+        "e":"AQAB",
+        "use":"sig",
+        "kid":"aaf48c76-acb1-46ec-9171-9039343479d0",
+        "alg":"RS256",
+        "n":"j2wH9Preyy5eTK2mwhwdjAdN0-6-2dJS2b-GvB27wXy3CPI8J77H1IBgfDfNTvOW_5CmbqSnR6NyzosZzibYqm02LmmLlj7G566F-1lOrhUvQOZw89TQ8iNsGY-x5i_BSxG3Td87-nSSPIqtRqSxpB4_Zyl0VW0nWff00PlrWWG73yuE_DG9TbvsjX5F_8huwXsPI6QIsa4h0D-1-FJFoaHRzXsFwVBwnbJkmxN97q6YzeV9fPyO_8MhXzU7_L2nNu9wa08-RFG6SR1u8V_8nxJENrZu2dB298nNHhtRR4TggYYRETFKtvx41yci7N4nKXMeYjAMi2Ul6zpU7kmeOw"
+        }
+
+
+using this i can get the PEM value, being:
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj2wH9Preyy5eTK2mwhwd
+jAdN0+6+2dJS2b+GvB27wXy3CPI8J77H1IBgfDfNTvOW/5CmbqSnR6NyzosZzibY
+qm02LmmLlj7G566F+1lOrhUvQOZw89TQ8iNsGY+x5i/BSxG3Td87+nSSPIqtRqSx
+pB4/Zyl0VW0nWff00PlrWWG73yuE/DG9TbvsjX5F/8huwXsPI6QIsa4h0D+1+FJF
+oaHRzXsFwVBwnbJkmxN97q6YzeV9fPyO/8MhXzU7/L2nNu9wa08+RFG6SR1u8V/8
+nxJENrZu2dB298nNHhtRR4TggYYRETFKtvx41yci7N4nKXMeYjAMi2Ul6zpU7kme
+OwIDAQAB
+-----END PUBLIC KEY-----
+
+
+And this encoded (and you encode everything including the being and end pubic key) to base64 is:
+LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFqMndIOVByZXl5NWVUSzJtd2h3ZApqQWROMCs2KzJkSlMyYitHdkIyN3dYeTNDUEk4Sjc3SDFJQmdmRGZOVHZPVy81Q21icVNuUjZOeXpvc1p6aWJZCnFtMDJMbW1MbGo3RzU2NkYrMWxPcmhVdlFPWnc4OVRROGlOc0dZK3g1aS9CU3hHM1RkODcrblNTUElxdFJxU3gKcEI0L1p5bDBWVzBuV2ZmMDBQbHJXV0c3M3l1RS9ERzlUYnZzalg1Ri84aHV3WHNQSTZRSXNhNGgwRCsxK0ZKRgpvYUhSelhzRndWQnduYkprbXhOOTdxNll6ZVY5ZlB5Ty84TWhYelU3L0wybk51OXdhMDgrUkZHNlNSMXU4Vi84Cm54SkVOclp1MmRCMjk4bk5IaHRSUjRUZ2dZWVJFVEZLdHZ4NDF5Y2k3TjRuS1hNZVlqQU1pMlVsNnpwVTdrbWUKT3dJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==
+
+
+we then want to create a Symmetric key and generate, and put the k value as this base 64 encoded value^^
+
+Then we set the header of the JWT in the repeater as HS256 alg, then sign the request using the Symmetric key we generated for the admin user and get access to the /admin page
+
+
+
+
+
+

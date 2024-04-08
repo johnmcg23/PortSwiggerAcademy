@@ -1,0 +1,41 @@
+Bypassing client authentication
+As part of the TLS handshake, servers authenticate themselves with the client (usually a browser) 
+by providing a certificate. This certificate contains their "common name" (CN), which should match 
+their registered hostname. The client can then use this to verify that they're talking to a legitimate 
+server belonging to the expected domain.
+
+
+Some sites go one step further and implement a form of mutual TLS authentication, where clients must 
+also present a certificate to the server. In this case, the client's CN is often a username or suchlike, 
+which can be used in the back-end application logic as part of an access control mechanism, for example.
+
+
+The component that authenticates the client typically passes the relevant details from the certificate 
+to the application or back-end server via one or more non-standard HTTP headers. 
+For example, front-end servers sometimes append a header containing the client's CN to any incoming requests:
+
+GET /admin HTTP/1.1
+Host: normal-website.com
+X-SSL-CLIENT-CN: carlos
+
+As these headers are supposed to be completely hidden from users, they are often implicitly trusted by 
+back-end servers. Assuming you're able to send the right combination of headers and values, this may 
+enable you to bypass access controls.
+
+In practice, this behavior isn't usually exploitable because front-end servers tend to overwrite these 
+headers if they're already present. However, smuggled requests are hidden from the front-end altogether, 
+so any headers they contain will be sent to the back-end unchanged.
+
+"
+POST /example HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: x-www-form-urlencoded
+Content-Length: 64
+Transfer-Encoding: chunked
+
+0
+
+GET /admin HTTP/1.1
+X-SSL-CLIENT-CN: administrator
+Foo: x
+"

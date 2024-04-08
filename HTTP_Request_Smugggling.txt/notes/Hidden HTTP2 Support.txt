@@ -1,0 +1,21 @@
+Hidden HTTP/2 support
+Browsers and other clients, including Burp, typically only use HTTP/2 to communicate with servers that explicitly advertise 
+support for it via ALPN as part of the TLS handshake.
+
+Some servers support HTTP/2 but fail to declare this properly due to misconfiguration. In such cases, it can appear as though 
+the server only supports HTTP/1.1 because clients default to this as a fallback option. As a result, testers may overlook 
+viable HTTP/2 attack surface and miss protocol-level issues, such as the examples of HTTP/2 downgrade-based request 
+smuggling that we covered above.
+
+To force Burp Repeater to use HTTP/2 so that you can test for this misconfiguration manually:
+-   From the Settings dialog, go to Tools > Repeater.
+
+-   Under Connections, enable the Allow HTTP/2 ALPN override option.
+
+-   In Repeater, go to the Inspector panel and expand the Request attributes section.
+
+-   Use the switch to set the Protocol to HTTP/2. Burp will now send all requests on this tab using HTTP/2, regardless of whether the server advertises support for this.
+
+
+Note
+If you're using Burp Suite Professional, Burp Scanner automatically detects instances of hidden HTTP/2 support.

@@ -1,0 +1,29 @@
+HTTP/2 message length
+Request smuggling is fundamentally about exploiting discrepancies between how different servers interpret the length of a request. 
+HTTP/2 introduces a single, robust mechanism for doing this, which has long been thought to make it inherently immune to request smuggling.
+
+Although you won't see this in Burp, HTTP/2 messages are sent over the wire as a series of separate "frames". Each frame is preceded 
+by an explicit length field, which tells the server exactly how many bytes to read in. Therefore, the length of the request is the 
+sum of its frame lengths.
+
+In theory, this mechanism means there is no opportunity for an attacker to introduce the ambiguity required for request smuggling, 
+as long as the website uses HTTP/2 end to end. In the wild, however, this is often not the case due to the widespread but dangerous 
+practice of HTTP/2 downgrading.
+
+HTTP/2 downgrading
+HTTP/2 downgrading is the process of rewriting HTTP/2 requests using HTTP/1 syntax to generate an equivalent HTTP/1 request. 
+Web servers and reverse proxies often do this in order to offer HTTP/2 support to clients while communicating with back-end 
+servers that only speak HTTP/1. This practice is a prerequisite for many of the attacks covered in this section.
+
+HTTP/2 downgrading
+Note on HTTP/2 message representation
+As HTTP/2 is a binary protocol, we've used some artistic license to represent HTTP/2 messages in a human-readable format 
+throughout these materials:
+
+We display each message as a single entity, rather than separate "frames".
+
+We display the headers using plain text name and value fields.
+
+We prefix pseudo-header names with a colon to help differentiate them from normal headers.
+
+This closely resembles the way Burp represents HTTP/2 messages in the Inspector, but note that they don't actually look like this on the wire.

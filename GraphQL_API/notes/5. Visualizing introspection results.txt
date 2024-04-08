@@ -1,0 +1,5 @@
+Visualizing introspection results
+Responses to introspection queries can be full of information, but are often very long and hard to process.
+
+You can view relationships between schema entities more easily using a GraphQL visualizer. This is an online tool that takes the results 
+of an introspection query and produces a visual representation of the returned data, including the relationships between operations and types.

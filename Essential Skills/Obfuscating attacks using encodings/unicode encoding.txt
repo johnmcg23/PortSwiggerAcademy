@@ -1,0 +1,22 @@
+Unicode escape sequences consist of the prefix \u followed by the four-digit hex code for the character. 
+
+For example, \u003a represents a colon. 
+
+ES6 also supports a new form of unicode escape using curly braces: \u{3a}.
+
+
+
+For example, let's say you're trying to exploit DOM XSS where your input is passed to the eval() sink as a string. 
+If your initial attempts are blocked, try escaping one of the characters as follows:
+
+eval("\u0061lert(1)")
+
+As this will remain encoded server-side, it may go undetected until the browser decodes it again.
+
+Inside a string, you can escape any characters like this. However, outside of a string, escaping some characters 
+will result in a syntax error. This includes opening and closing parentheses, for example.
+
+It's also worth noting that the ES6-style unicode escapes also allow optional leading zeros, so some WAFs may be 
+easily fooled using the same technique we used for HTML encodings. For example:
+
+<a href="javascript\u{0000000003a}alert(1)">Click me</a>

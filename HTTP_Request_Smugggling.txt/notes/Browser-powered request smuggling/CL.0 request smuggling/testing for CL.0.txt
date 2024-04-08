@@ -1,0 +1,35 @@
+Testing for CL.0 vulnerabilities
+To probe for CL.0 vulnerabilities, first send a request containing another partial request in its body, then send a normal follow-up request. 
+You can then check to see whether the response to the follow-up request was affected by the smuggled prefix.
+
+
+In the following example, the follow-up request for the home page has received a 404 response. 
+This strongly suggests that the back-end server interpreted the body of the POST request (GET /hopefully404...) as the start of another request.
+
+
+POST /vulnerable-endpoint HTTP/1.1 
+Host: vulnerable-website.com 
+Connection: keep-alive 
+Content-Type: application/x-www-form-urlencoded 
+Content-Length: 34 
+GET /hopefully404 HTTP/1.1 
+Foo: xGET / HTTP/1.1 
+Host: vulnerable-website.com
+
+HTTP/1.1 200 OK HTTP/1.1 404 Not Found
+
+Crucially, notice that we haven't tampered with the headers in any way - the length of the request is specified by a perfectly normal, accurate Content-Length header.
+
+
+To try this yourself using Burp Repeater:
+-   Create one tab containing the setup request and another containing an arbitrary follow-up request.
+
+-   Add the two tabs to a group in the correct order.
+
+-   Using the drop-down menu next to the Send button, change the send mode to Send group in sequence (single connection).
+
+-   Change the Connection header to keep-alive.
+
+-   Send the sequence and check the responses.
+
+In the wild, we've mostly observed this behavior on endpoints that simply aren't expecting POST requests, so they implicitly assume that no requests have a body. Endpoints that trigger server-level redirects and requests for static files are prime candidates.

@@ -1,0 +1,15 @@
+Common endpoint names
+GraphQL services often use similar endpoint suffixes. When testing for GraphQL endpoints, 
+you should look to send universal queries to the following locations:
+
+/graphql
+/api
+/api/graphql
+/graphql/api
+/graphql/graphql
+If these common endpoints don't return a GraphQL response, you could also try appending /v1 to the path.
+
+
+Note:
+GraphQL services will often respond to any non-GraphQL request with a "query not present" or similar error. 
+You should bear this in mind when testing for GraphQL endpoints.

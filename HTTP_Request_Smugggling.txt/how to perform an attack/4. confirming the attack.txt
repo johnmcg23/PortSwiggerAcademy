@@ -1,0 +1,22 @@
+This involves sending two requests to the application in quick succession:
+
+An "attack" request that is designed to interfere with the processing of the next request.
+A "normal" request.
+
+If the response to the normal request contains the expected interference, then the vulnerability is confirmed.
+
+For example, suppose the normal request looks like this:
+
+"
+POST /search HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 11
+
+q=smuggling
+"
+
+This request normally receives an HTTP response with status code 200, containing some search results.
+
+The attack request that is needed to interfere with this request depends on the variant of request 
+smuggling that is present: CL.TE vs TE.CL.

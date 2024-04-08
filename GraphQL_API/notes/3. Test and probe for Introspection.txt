@@ -1,0 +1,30 @@
+Discovering schema information
+The next step in testing the API is to piece together information about the underlying schema.
+
+The best way to do this is to use introspection queries. Introspection is a built-in GraphQL function that enables you to 
+query a server for information about the schema.
+
+Introspection helps you to understand how you can interact with a GraphQL API. It can also disclose potentially sensitive data, 
+such as description fields.
+
+
+Using introspection
+To use introspection to discover schema information, query the __schema field. This field is available on the root type of all queries.
+
+Like regular queries, you can specify the fields and structure of the response you want to be returned when running an introspection query. 
+For example, you might want the response to contain only the names of available mutations.
+
+
+
+Probing for introspection
+It is best practice for introspection to be disabled in production environments, but this advice is not always followed.
+
+You can probe for introspection using the following simple query. If introspection is enabled, the response returns the names of all available queries.
+
+
+    #Introspection probe request
+
+    {
+        "query": "{__schema{queryType{name}}}"
+    }
+

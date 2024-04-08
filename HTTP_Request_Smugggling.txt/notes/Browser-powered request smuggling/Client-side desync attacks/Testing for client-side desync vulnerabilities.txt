@@ -1,0 +1,22 @@
+Testing for client-side desync vulnerabilities
+Due to the added complexity of relying on a browser to deliver your attack, it's important to be 
+methodical when testing for client-side desync vulnerabilities. Although it may be tempting to 
+jump ahead at times, we recommend the following workflow. 
+This ensures that you confirm your assumptions about each element of the attack in stages.
+
+
+-   Probe for potential desync vectors in Burp.
+
+-   Confirm the desync vector in Burp.
+
+-   Build a proof of concept to replicate the behavior in a browser.
+
+-   Identify an exploitable gadget.
+
+-   Construct a working exploit in Burp.
+
+-   Replicate the exploit in your browser.
+
+
+
+Both Burp Scanner and the HTTP Request Smuggler extension can help you automate much of this process, but it's useful to know how to do this manually to cement your understanding of how it works.

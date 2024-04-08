@@ -1,0 +1,7 @@
+Blind XEE occurs when the server does not return data in text format when it fails.
+
+We have to use creative ways to retrive the info when it fails, like getting error messages
+to print out the values we are looking or use OAST out-of-band network interactions, sometimes exfiltrating sensitive data within 
+the interaction data.
+
+

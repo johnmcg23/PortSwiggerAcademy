@@ -1,0 +1,10 @@
+A URL typically looks like this:
+[...]/?search=Fish+%26+Chips
+
+Any URL-based input is automatically URL decoded server-side before it is assigned to the relevant variables.
+
+you may be able to smuggle payloads to the back-end application simply by encoding any characters or words that are blacklisted.
+
+For example, in a SQL injection attack, you might encode the keywords, so 
+
+SELECT becomes %53%45%4C%45%43%54 and so on.

@@ -1,0 +1,28 @@
+So of course there is the typical ones:
+
+jwk (JSON Web Key) - 
+Provides an embedded JSON object representing the key.
+
+jku (JSON Web Key Set URL) - 
+Provides a URL from which servers can fetch a set of keys containing the correct key.
+
+kid (Key ID) - 
+Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from. 
+Depending on the format of the key, this may have a matching kid parameter.
+
+Then there are extra ones that are exciting:
+
+cty (Content Type) - 
+Sometimes used to declare a media type for the content in the JWT payload. 
+This is usually omitted from the header, but the underlying parsing library may support it anyway. 
+If you have found a way to bypass signature verification, you can try injecting a cty header to change the 
+content type to text/xml or application/x-java-serialized-object, which can potentially enable new vectors 
+for XXE and deserialization attacks.
+
+x5c (X.509 Certificate Chain) - Sometimes used to pass the X.509 public key certificate or certificate chain 
+of the key used to digitally sign the JWT. This header parameter can be used to inject self-signed certificates, 
+similar to the jwk header injection attacks discussed above. Due to the complexity of the X.509 format and 
+its extensions, parsing these certificates can also introduce vulnerabilities. 
+Details of these attacks are beyond the scope of these materials, but for more details, check out CVE-2017-2800 and 
+CVE-2018-2633.
+

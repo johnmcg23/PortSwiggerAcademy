@@ -1,0 +1,13 @@
+XML is closely related to HTML and also supports character encoding using the same numeric escape sequences.
+
+This is useful for bypassing WAFs and other filters, which may block your requests if they detect certain keywords 
+associated with SQL injection attacks.
+
+<stockCheck>
+    <productId>
+        123
+    </productId>
+    <storeId>
+        999 &#x53;ELECT * FROM information_schema.tables
+    </storeId>
+</stockCheck>

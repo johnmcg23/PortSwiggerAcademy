@@ -1,0 +1,10 @@
+Symmetric encryption uses the same key for both encryption and decryption. 
+This means that the key must be known to all parties involved in the communication, 
+which can be a security risk if the key is not handled properly. Examples of symmetric 
+encryption algorithms include AES, DES, and RC4.
+
+Asymmetric encryption, on the other hand, uses a pair of keys: a public key for encryption 
+and a private key for decryption. The public key can be freely distributed, while the 
+private key must be kept secret. This solves the key distribution problem of symmetric 
+encryption, but it is computationally more expensive. Examples of asymmetric encryption 
+algorithms include RSA, DSA, and ECC.

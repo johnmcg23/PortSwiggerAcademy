@@ -1,0 +1,19 @@
+Finding TE.CL vulnerabilities using timing techniques
+If an application is vulnerable to the TE.CL variant of request smuggling, then sending a request 
+like the following will often cause a time delay:
+
+"
+POST / HTTP/1.1
+Host: vulnerable-website.com
+Transfer-Encoding: chunked
+Content-Length: 6
+
+0
+
+X
+"
+
+Since the front-end server uses the Transfer-Encoding header, it will forward only part of this request, 
+omitting the X. The back-end server uses the Content-Length header, expects more content in the message body,
+and waits for the remaining content to arrive. 
+This will cause an observable time delay.

