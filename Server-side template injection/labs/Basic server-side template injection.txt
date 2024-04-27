@@ -1,0 +1,30 @@
+This lab is vulnerable to server-side template injection due to the unsafe construction of an ERB template.
+
+To solve the lab, review the ERB documentation to find out how to execute arbitrary code, then delete the morale.txt file from Carlos's home directory.
+
+
+
+initially clicking around the website I had noticed a prodcut was out of stock and this was in the url as a message.
+
+Investigating it further i was able to change the message that appeared on screen.
+
+Testing for server side template injection wiht the following in the url message parameter:
+<%= 7 * 7 %>
+
+
+this gave the output as 49, clearly indicating that this was server side template injection.
+
+
+knowing this I had then to find out the engine it was running on, submitting:
+<%=foobar%>
+
+gave the error indicating ruby engine version 2.7.0
+
+knowing this i submitted next was:
+<%=+self.methods+%25>
+
+this gave a list of all the methods available to me to use, and after asking chatgpt which one i could use to delete a file
+it gave the folloiwng payload:
+?message=<%=+instance_eval('File.delete("/home/carlos/morale.txt")')+%25>
+
+this solved the lab.

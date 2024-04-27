@@ -1,0 +1,14 @@
+https://0a7c00cf04cec00880f42629005b00f0.web-security-academy.net/?search=1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
+
+
+-   The exploit uses toString() to create a string without using quotes. 
+
+-   It then gets the String prototype and overwrites the charAt function for every string. 
+    This effectively breaks the AngularJS sandbox. 
+
+-   Next, an array is passed to the orderBy filter. 
+    We then set the argument for the filter by again using toString() to create a string and the String constructor property. 
+    
+
+-   Finally, we use the fromCharCode method generate our payload by converting character codes into the string x=alert(1). 
+    Because the charAt function has been overwritten, AngularJS will allow this code where normally it would not.

