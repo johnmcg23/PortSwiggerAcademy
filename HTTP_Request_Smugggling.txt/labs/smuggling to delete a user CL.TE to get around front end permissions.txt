@@ -20,3 +20,12 @@ content-length: 10
 
 x=
 "
+
+
+we use this when getting the error of:
+
+{"error":"Duplicate header names are not allowed"}
+
+This means the server still considers these two requests as a single request. 
+To fix this, we need to add the Content-Length header and the Content-Type header.
+
