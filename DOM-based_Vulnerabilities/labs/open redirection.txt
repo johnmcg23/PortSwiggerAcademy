@@ -1,0 +1,38 @@
+
+
+
+
+there is the following in the web page:
+<a href='#' onclick='returnURL' = /url=https?:\/\/.+)/.exec(location); if(returnUrl)location.href = returnUrl[1];else location.href = "/"'>Back to Blog</a>
+
+
+this takes a user controllable input into a sink.
+
+URL parameter named url from the current page's URL using a regular expression: /url=(https?:\/\/.+)/ is the user controllable data
+
+Location.href is the sink, causing the browser to navigate to the extracted URL
+
+
+payload in the URL bar:
+https://0a7400580424fa2380e61232002500ad.web-security-academy.net/post?postId=4&url=https://exploit-0a9e00e10446fa8a8024118401780038.exploit-server.net/
+
+
+
+
+These are some sinks for DOM-based open-redirection vulnerabilities
+
+location
+location.host
+location.hostname
+location.href
+location.pathname
+location.search
+location.protocol
+location.assign()
+location.replace()
+open()
+element.srcdoc
+XMLHttpRequest.open()
+XMLHttpRequest.send()
+jQuery.ajax()
+$.ajax()

